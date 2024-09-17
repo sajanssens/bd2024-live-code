@@ -37,8 +37,20 @@ public class Client {
     }
 
     public void setName(String newName) {
-        if (!isUpperCase(newName.charAt(0))) {
+        // NPE: object.methodCall(), waarbij dan object = null
+        if (newName == null) {
+            throw new IllegalArgumentException("Name cannot be null");
+        }
+
+        char firstLetter = newName.charAt(0);
+        if (!isUpperCase(firstLetter)) {
             System.err.println("Name must start with uppercase");
+            return;
+        }
+
+        String remainder = newName.substring(1);
+        if (!remainder.toLowerCase().equals(remainder)) {
+            System.err.println("Name must end with all lower case letters.");
             return;
         }
 
@@ -52,6 +64,10 @@ public class Client {
 
     public void setMyHouse(House h) {
         this.myHouse = h;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void addLaptop(Laptop laptop) {
