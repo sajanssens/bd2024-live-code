@@ -12,14 +12,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class ClientTest {
 
-    private Client sut;
+    private Client sut; // declaratie
+    private List<Laptop> mockedList;
 
     @BeforeEach
     void setUp() {
-        sut = new Client();
+        sut = new Client(); // initialisatie (1e x vullen)
+        mockedList = mock(List.class);
+        sut.setLaptops(this.mockedList);
     }
 
     // met 1, 2, 3, ... hoofdletters
@@ -118,7 +127,7 @@ class ClientTest {
     }
 
     @Test
-    void testTransfer() {
+    void testTransferWithManualMock() {
         // given
         byte[] dataSource = {1, 2, 3};
         Laptop laptop1 = new Laptop("HP");
@@ -138,6 +147,34 @@ class ClientTest {
         for (int i = 0; i < dataSource.length; i++) {
             assertEquals(dataSource[i], dataDest[i]);
         }
+    }
+
+    @Test
+    void testTransferWithMockito() {
+        // given
+        byte[] dataSource = {1, 2, 3};
+        Laptop laptop1 = new Laptop("HP");
+        laptop1.setData(dataSource);
+        Laptop laptop2 = new Laptop("DELL");
+
+        when(this.mockedList.indexOf(eq(laptop1))).thenReturn(0);
+        when(this.mockedList.indexOf(eq(laptop2))).thenReturn(1);
+        when(this.mockedList.indexOf(any())).thenReturn(10);
+
+        sut.addLaptop(laptop1);
+        sut.addLaptop(laptop2);
+
+        // when
+        boolean result = sut.transferData(laptop1, laptop2);
+
+        // then
+        byte[] dataDest = laptop2.getData();
+        assertTrue(result);
+        for (int i = 0; i < dataSource.length; i++) {
+            assertEquals(dataSource[i], dataDest[i]);
+        }
+
+        verify(this.mockedList, times(2)).indexOf(any());
     }
 }
 
