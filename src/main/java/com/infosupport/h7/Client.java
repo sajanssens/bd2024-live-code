@@ -1,5 +1,6 @@
 package com.infosupport.h7;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Character.isUpperCase;
@@ -12,7 +13,7 @@ public class Client {
     private int id = 0;
     private String name = null;
     private House myHouse;
-    private List<Laptop> laptops;
+    private List<Laptop> laptops = new ArrayList<>();
 
     // CONSTRUCTORS -----------------------
     // no arg constructor
@@ -25,21 +26,25 @@ public class Client {
     }
 
     // METHODS (BEHAVIOUR) -----------------
-    public void transferData(Laptop from, Laptop to) {
+    public boolean transferData(Laptop from, Laptop to) {
         int f = this.laptops.indexOf(from);
         int t = this.laptops.indexOf(to);
         if (f != -1 && t != -1) {
             byte[] data = from.getData();
-            to.setData(data);
+            to.setData(data.clone());
+            return true;
         } else {
             throw new IllegalArgumentException("Laptop from or to don't exist");
         }
     }
 
+    // Java bean convention:
+
     public void setName(String newName) {
         // NPE: object.methodCall(), waarbij dan object = null
-        if (newName == null) {
-            throw new IllegalArgumentException("Name cannot be null");
+        if (newName == null || newName.isBlank()) {
+            System.err.println("Name may not be null");
+            throw new IllegalArgumentException("Name may not be null");
         }
 
         char firstLetter = newName.charAt(0);
@@ -57,7 +62,6 @@ public class Client {
         this.name = newName;
     }
 
-    // Java bean convention:
     public void setId(int id) {
         this.id = id;
     }
@@ -72,6 +76,14 @@ public class Client {
 
     public void addLaptop(Laptop laptop) {
         this.laptops.add(laptop);
+    }
+
+    public List<Laptop> getLaptops() {
+        return laptops;
+    }
+
+    public void setLaptops(List<Laptop> laptops) {
+        this.laptops = laptops;
     }
 
     public static void printAlgemeneVoorwaarden() {
