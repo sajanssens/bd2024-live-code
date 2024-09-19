@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -159,7 +160,7 @@ class ClientTest {
 
         when(this.mockedList.indexOf(eq(laptop1))).thenReturn(0);
         when(this.mockedList.indexOf(eq(laptop2))).thenReturn(1);
-        when(this.mockedList.indexOf(any())).thenReturn(10);
+        when(this.mockedList.indexOf(any(Laptop.class))).thenReturn(10);
 
         sut.addLaptop(laptop1);
         sut.addLaptop(laptop2);
@@ -168,13 +169,17 @@ class ClientTest {
         boolean result = sut.transferData(laptop1, laptop2);
 
         // then
-        byte[] dataDest = laptop2.getData();
         assertTrue(result);
+        byte[] dataDest = laptop2.getData();
         for (int i = 0; i < dataSource.length; i++) {
             assertEquals(dataSource[i], dataDest[i]);
         }
 
-        verify(this.mockedList, times(2)).indexOf(any());
+        // ... of hetzelfde met AssertJ:
+        assertThat(result).isTrue();
+        assertThat(dataDest).contains(dataSource);
+
+        verify(this.mockedList, times(2)).indexOf(any(Laptop.class));
     }
 }
 

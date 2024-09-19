@@ -1,9 +1,9 @@
 package com.infosupport.h7;
 
 public class House {
-    int id;
+    private long id;
 
-    public House(int id) {
+    public House(long id) {
         this.id = id;
     }
 }

@@ -1,4 +1,4 @@
-package com.infosupport.h7;
+package com.infosupport.h7.mvc.model.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class Client {
     private static int nextId = 0;
 
     // FIELDS (STATE) ---------------------
-    private int id = 0;
+    private long id = 0;
     private String name = null;
     private House myHouse;
     private List<Laptop> laptops = new ArrayList<>();
@@ -21,14 +21,16 @@ public class Client {
     public Client() {
     }
 
-    public Client(String name) {
-        this.id = nextId++;
+    public Client(long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public Client(int id, String name) {
+    public Client(long id, String name, House myHouse, List<Laptop> laptops) {
         this.id = id;
         this.name = name;
+        this.myHouse = myHouse;
+        this.laptops = laptops;
     }
 
     // METHODS (BEHAVIOUR) -----------------
@@ -68,7 +70,7 @@ public class Client {
         this.name = newName;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -94,5 +96,15 @@ public class Client {
 
     public static void printAlgemeneVoorwaarden() {
         System.out.println(algemeneVoorwaarden);
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", myHouse=" + myHouse +
+                ", laptops=" + laptops +
+                '}';
     }
 }
