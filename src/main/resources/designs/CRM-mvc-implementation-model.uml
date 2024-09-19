@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.infosupport.h7.mvc.model.dao.ClientDao</OriginalElement>
+  <nodes>
+    <node x="-3049.9375" y="901.5">com.infosupport.h7.mvc.Start</node>
+    <node x="-2472.0" y="1419.0">com.infosupport.h7.mvc.model.dao.ClientDao</node>
+    <node x="-2813.96875" y="873.0">com.infosupport.h7.mvc.view.Hoofdscherm</node>
+    <node x="-2087.578125" y="1813.80859375">com.infosupport.h7.mvc.model.domain.Laptop</node>
+    <node x="-2509.0" y="845.0">com.infosupport.h7.mvc.view.KlantenScherm</node>
+    <node x="-2499.5" y="1139.0">com.infosupport.h7.mvc.controller.Controller</node>
+    <node x="-2530.5" y="1691.0">com.infosupport.h7.mvc.model.domain.Client</node>
+    <node x="-2857.3984375" y="1852.703125">com.infosupport.h7.mvc.model.domain.House</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.infosupport.h7.mvc.view.KlantenScherm" target="com.infosupport.h7.mvc.controller.Controller" relationship="DEPENDENCY">
+      <point x="0.0" y="95.0" />
+      <point x="0.0" y="-81.0" />
+    </edge>
+    <edge source="com.infosupport.h7.mvc.model.domain.Client" target="com.infosupport.h7.mvc.model.domain.Laptop" relationship="TO_MANY">
+      <point x="0.0" y="249.0" />
+      <point x="-2364.0" y="1908.80859375" />
+      <point x="-1984.078125" y="1908.80859375" />
+      <point x="0.0" y="-95.0" />
+    </edge>
+    <edge source="com.infosupport.h7.mvc.Start" target="com.infosupport.h7.mvc.view.Hoofdscherm" relationship="DEPENDENCY">
+      <point x="0.0" y="38.5" />
+      <point x="-2949.9375" y="940.0" />
+      <point x="-2679.46875" y="940.0" />
+      <point x="0.0" y="-67.0" />
+    </edge>
+    <edge source="com.infosupport.h7.mvc.view.Hoofdscherm" target="com.infosupport.h7.mvc.view.KlantenScherm" relationship="DEPENDENCY">
+      <point x="0.0" y="67.0" />
+      <point x="-2679.46875" y="940.0" />
+      <point x="-2364.0" y="940.0" />
+      <point x="0.0" y="-95.0" />
+    </edge>
+    <edge source="com.infosupport.h7.mvc.controller.Controller" target="com.infosupport.h7.mvc.model.dao.ClientDao" relationship="DEPENDENCY">
+      <point x="0.0" y="81.0" />
+      <point x="0.0" y="-81.0" />
+    </edge>
+    <edge source="com.infosupport.h7.mvc.model.domain.Client" target="com.infosupport.h7.mvc.model.domain.House" relationship="TO_ONE">
+      <point x="0.0" y="249.0" />
+      <point x="-2364.0" y="1905.703125" />
+      <point x="-2767.3984375" y="1905.703125" />
+      <point x="0.0" y="-53.0" />
+    </edge>
+    <edge source="com.infosupport.h7.mvc.model.dao.ClientDao" target="com.infosupport.h7.mvc.model.domain.Client" relationship="CREATE">
+      <point x="0.0" y="81.0" />
+      <point x="0.0" y="-249.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.512" showDependencies="true" x="-2014.02734375" y="1333.203125" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+
