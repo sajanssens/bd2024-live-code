@@ -7,6 +7,8 @@ import java.util.List;
 
 public class ClientDao {
 
+    Database db = Database.INSTANCE;
+
     // singleton design pattern begin -----------
     private static ClientDao self;
 
@@ -21,11 +23,15 @@ public class ClientDao {
     public Client save(String name) {
         Client c = new Client();
         c.setName(name);
-        Database.add(c);
+        db.add(c);
         return c;
     }
 
     public List<Client> getAll() {
-        return Database.clients;
+        return db.clients;
+    }
+
+    public void setDb(Database db) {
+        this.db = db;
     }
 }

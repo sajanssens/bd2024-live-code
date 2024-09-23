@@ -98,6 +98,10 @@ public class Client {
         System.out.println(algemeneVoorwaarden);
     }
 
+    public long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
