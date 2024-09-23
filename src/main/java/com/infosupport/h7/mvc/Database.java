@@ -22,7 +22,6 @@ public class Database {
     // create some clients with house and laptops
     static {
         for (int c = 0; c < 100; c++) {
-
             List<Laptop> clientLaps = createClientLaptops();
             House clientHouse = createClientHouse();
 
@@ -33,6 +32,8 @@ public class Database {
                             clientHouse, clientLaps));
         }
     }
+
+    private Database() { }
 
     private static House createClientHouse() {
         House clientHouse = new House(++nextHouseId);

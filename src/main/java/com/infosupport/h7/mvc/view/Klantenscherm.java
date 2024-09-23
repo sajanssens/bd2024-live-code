@@ -8,15 +8,15 @@ import static com.infosupport.h7.mvc.Util.prompt;
 import static com.infosupport.h7.mvc.Util.readLine;
 import static com.infosupport.h7.mvc.controller.Controller.controller;
 
-public class KlantenScherm {
+public class Klantenscherm {
 
     // singleton design pattern begin -----------
-    private static KlantenScherm self;
+    private static Klantenscherm self;
 
-    private KlantenScherm() { }
+    private Klantenscherm() { }
 
-    public static synchronized KlantenScherm klantenScherm() {
-        if (self == null) self = new KlantenScherm();
+    public static synchronized Klantenscherm klantenScherm() {
+        if (self == null) self = new Klantenscherm();
         return self;
     }
     // singleton design pattern end -------------

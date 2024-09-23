@@ -1,7 +1,7 @@
 package com.infosupport.h7.mvc.view;
 
 import static com.infosupport.h7.mvc.Util.readLine;
-import static com.infosupport.h7.mvc.view.KlantenScherm.klantenScherm;
+import static com.infosupport.h7.mvc.view.Klantenscherm.klantenScherm;
 
 public class Hoofdscherm {
     // singleton design pattern begin -----------
