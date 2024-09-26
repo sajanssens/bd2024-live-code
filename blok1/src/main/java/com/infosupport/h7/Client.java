@@ -50,7 +50,7 @@ public class Client {
         // NPE: object.methodCall(), waarbij dan object = null
         if (newName == null || newName.isBlank()) {
             System.err.println("Name may not be null");
-            throw new IllegalArgumentException("Name may not be null");
+            throw new NameIsNullException("Name");
         }
 
         char firstLetter = newName.charAt(0);
