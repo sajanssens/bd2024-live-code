@@ -5,6 +5,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
 
 public class StreamsDemo {
 
@@ -38,9 +39,10 @@ public class StreamsDemo {
         // Dit kan ook met de Streams API:
         List<Integer> resultToo =                      // Stappen:
                 integers.stream()                      // 1. create (1 keer)
+                        // .parallel()
                         .filter(i -> i % 2 == 0)       // 2. modify (0..* keer)
                         .map(i -> i + 1)               //
-                        .toList();                     // 3. terminate (1 keer)
+                        .collect(toList());            // 3. terminate (1 keer)
 
         System.out.println(resultToo);
 

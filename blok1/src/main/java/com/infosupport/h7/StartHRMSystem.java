@@ -21,7 +21,11 @@ public class StartHRMSystem {
         House h = new House(nextHouseId);
         b.setMyHouse(h);
 
-        b.addLaptop(new Laptop("DELL"));
+        Laptop dell = new Laptop("DELL", new byte[]{});
+        Laptop sameDell = new Laptop("DELL");
+
+        b.addLaptop(dell);
+        b.addLaptop(sameDell);
         b.addLaptop(new Laptop("HP"));
     }
 }
