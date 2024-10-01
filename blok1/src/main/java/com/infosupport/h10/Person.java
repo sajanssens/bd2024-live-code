@@ -27,6 +27,10 @@ public abstract class Person {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean hasLicense() {
+        return true; // TODO: doe iets met leeftijd
+    }
 }
 
 class Student extends Person implements Taxable {
@@ -54,14 +58,20 @@ class Student extends Person implements Taxable {
     public BigDecimal calculateIncomeTax(int level) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public boolean hasLicense() {
+        return true;
+    }
 }
 
 class Start {
     public static void main(String[] args) {
+        Taxable t1 = new Student("Bram", 32);
+
         Student student = new Student("Bram", 32);
         student.iets(2);
         student.ietsAbstracts(3);
-
         Taxable t = new Taxable() {
 
             @Override public boolean hasSalary() {
@@ -75,5 +85,17 @@ class Start {
 
         // .. c = (Integer o) -> 0;
         System.out.println(t);
+
+        Car car = new Car();
+        car.driveWith(student);
+    }
+}
+
+class Car {
+
+    public void driveWith(Person somePerson) {
+        if (somePerson.hasLicense()) {
+            System.out.println("Lekker rijden met " + somePerson.getName());
+        }
     }
 }
