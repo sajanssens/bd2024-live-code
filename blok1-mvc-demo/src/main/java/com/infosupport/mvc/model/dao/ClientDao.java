@@ -3,7 +3,9 @@ package com.infosupport.mvc.model.dao;
 import com.infosupport.mvc.Database;
 import com.infosupport.mvc.model.domain.Client;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ClientDao {
 
@@ -34,4 +36,14 @@ public class ClientDao {
     public void setDb(Database db) {
         this.db = db;
     }
+
+    public <T> Map<Integer, T> toMap(List<T> t) {
+        Map<Integer, T> map = new HashMap<>();
+        for (int i = 0; i < t.size(); i++) {
+            T t1 = t.get(i);
+            map.put(i, t1);
+        }
+        return map;
+    }
+
 }
