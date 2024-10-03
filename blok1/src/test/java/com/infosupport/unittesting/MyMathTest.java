@@ -2,6 +2,8 @@ package com.infosupport.unittesting;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
+
 import static com.infosupport.unittesting.MyMath.fac;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -47,5 +49,31 @@ public class MyMathTest {
     public void fac_given13_throwsArithmeticException() {
         var actualException = assertThrows(ArithmeticException.class, () -> fac(13));
         assertEquals(actualException.getMessage(), "fac(13) is not supported (max is 12)");
+    }
+
+    @Test
+    public void fac_givenBigIntNegativeNumber_throwsIllegalArgumentException() {
+        var actualException = assertThrows(IllegalArgumentException.class, () -> fac(new BigInteger("-2")));
+        assertEquals(actualException.getMessage(), "fac(-2) is not supported (only positive numbers)");
+    }
+
+    @Test
+    public void fac_givenBigInt0_returns1() {
+        assertEquals(BigInteger.ONE, fac(BigInteger.ZERO));
+    }
+
+    @Test
+    public void fac_givenBigInt1_returns1() {
+        assertEquals(BigInteger.ONE, fac(BigInteger.ONE));
+    }
+
+    @Test
+    public void fac_givenBigInt2_returns2() {
+        assertEquals(BigInteger.TWO, fac(BigInteger.TWO));
+    }
+
+    @Test
+    public void fac_givenBigInt20_returns2432902008176640000 () {
+        assertEquals(new BigInteger("2432902008176640000"), fac(new BigInteger("20")));
     }
 }
