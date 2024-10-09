@@ -3,8 +3,9 @@ package com.infosupport.unittesting;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
+import java.util.Random;
 
-import static com.infosupport.unittesting.MyMath.fac;
+import static com.infosupport.unittesting.MyMath.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -75,5 +76,45 @@ public class MyMathTest {
     @Test
     public void fac_givenBigInt20_returns2432902008176640000 () {
         assertEquals(new BigInteger("2432902008176640000"), fac(new BigInteger("20")));
+    }
+
+    @Test
+    public void areaOfCircle_givenR2_eq12566() {
+        assertEquals(areaOfCircle(2), 12.566370614359172);
+    }
+
+    @Test
+    public void throwDice_givenRandom0_returns1() {
+        var randomProviderMock = new RandomProviderMock(0);
+        var myMath = new MyMath(randomProviderMock);
+        assertEquals(myMath.throwDice(), 1);
+    }
+
+    @Test
+    public void throwDice_givenRandom015_returns1() {
+        var randomProviderMock = new RandomProviderMock(0.15);
+        var myMath = new MyMath(randomProviderMock);
+
+        assertEquals(myMath.throwDice(), 1);
+    }
+
+    @Test
+    public void throwDice_givenRandom01666667_returns2() {
+        var myMath = new MyMath(new RandomProviderMock(.1666667));
+
+        assertEquals(myMath.throwDice(), 2);
+    }
+
+    private static class RandomProviderMock extends RandomProvider {
+
+        double randomValue;
+        RandomProviderMock(double randomValue) {
+            this.randomValue = randomValue;
+        }
+
+        @Override
+        public double random() {
+            return this.randomValue;
+        }
     }
 }

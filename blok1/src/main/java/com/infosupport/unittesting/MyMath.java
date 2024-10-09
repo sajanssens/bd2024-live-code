@@ -1,8 +1,14 @@
 package com.infosupport.unittesting;
 
 import java.math.BigInteger;
+import java.util.Random;
 
 public class MyMath {
+    private final RandomProvider randomProvider;
+
+    public MyMath(RandomProvider randomProvider) {
+        this.randomProvider = randomProvider;
+    }
 
     public static int fac(int n) {
         if(n >= 13 ){
@@ -24,6 +30,22 @@ public class MyMath {
         if(n.compareTo(BigInteger.ONE) > 0){
             return n.multiply(fac(n.subtract(BigInteger.ONE)));
         }
+
         return BigInteger.ONE;
+    }
+
+    public static double areaOfCircle(double r) {
+        return Math.PI * Math.pow(r, 2);
+    }
+
+    public int throwDice() {
+        var rand = (randomProvider.random() * 6) + 1;
+        return (int) Math.floor(rand);
+    }
+
+    public static int throwDice2(Random r) {
+        var d = r.nextDouble();
+        var rand = (d * 6) + 1;
+        return (int) Math.floor(rand);
     }
 }

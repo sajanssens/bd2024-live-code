@@ -11,6 +11,43 @@
 
     <artifactId>blok1</artifactId>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals><goal>prepare-agent</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <goals><goal>report</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>default-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration><rules><rule>
+                            <element>BUNDLE</element>
+                            <limits>
+                                <limit>
+                                    <counter>BRANCH</counter> <!-- Or INSTRUCTION -->
+                                    <value>COVEREDRATIO</value>
+                                    <minimum>0.34</minimum> <!-- 34% -->
+                                </limit>
+                            </limits>
+                        </rule></rules></configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
