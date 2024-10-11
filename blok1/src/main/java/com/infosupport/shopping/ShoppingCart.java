@@ -10,21 +10,16 @@ import java.util.Map;
 
 public class ShoppingCart {
     private Map<Product, Integer> orders = new HashMap<>();
-    private String owner;
     private UserRepository userRepository;
     private BankingService bankingService;
 
-    public String getOwner() {
-        return owner;
-    }
 
     public Map<Product, Integer> getOrders() {
         return Collections.unmodifiableMap(orders);
     }
 
-    public ShoppingCart(String username, UserRepository userRepository, BankingService bankingService) {
+    public ShoppingCart(UserRepository userRepository, BankingService bankingService) {
         orders = new HashMap<Product, Integer>();
-        owner = username;
         this.userRepository = userRepository;
         this.bankingService = bankingService;
     }
@@ -53,9 +48,13 @@ public class ShoppingCart {
         return total;
     }
 
-    public void checkOut() {
+    public void checkOut(String owner) {
         var user = userRepository.getUser(owner);
-        bankingService.makePayment(user.accountNumber(), getTotal());
-        userRepository.addPaymentHistory(owner, getTotal());
+        var balance = bankingService.getBalance(user.accountNumber());
+        var total = getTotal();
+        if(balance.compareTo(total) >= 0) {
+            bankingService.makePayment(user.accountNumber(), getTotal());
+            userRepository.addPaymentHistory(owner, getTotal());
+        }
     }
 }
