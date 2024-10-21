@@ -97,7 +97,7 @@ class ClientTest {
 
         //                                                  when / act:
         // then / assert
-        assertThrows(IllegalArgumentException.class, () -> sut.setName(name));
+        assertThrows(NameIsNullException.class, () -> sut.setName(name));
     }
 
     @Test
@@ -107,7 +107,7 @@ class ClientTest {
 
         //                                                  when / act:
         // then / assert
-        assertThrows(IllegalArgumentException.class, () -> sut.setName(name));
+        assertThrows(NameIsNullException.class, () -> sut.setName(name));
     }
 
     @Test
@@ -117,11 +117,12 @@ class ClientTest {
 
         //                                                  when / act:
         // then / assert
-        assertThrows(IllegalArgumentException.class, () -> sut.setName(name));
+        assertThrows(NameIsNullException.class, () -> sut.setName(name));
     }
 
     @Test
     void givenALaptopWhenTheLaptopIsAddedItSucceeds() {
+        sut = new Client();
         Laptop laptop = new Laptop("");
         sut.addLaptop(laptop);
         assertEquals(1, sut.getLaptops().size());
