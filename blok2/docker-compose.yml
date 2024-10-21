@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   mysql:
-    image: mysql:latest
+    image: cir-cn.chp.belastingdienst.nl/external/bitnami/mysql:latest
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
