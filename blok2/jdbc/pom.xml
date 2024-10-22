@@ -5,20 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.infosupport</groupId>
-        <artifactId>bd2024-live-code</artifactId>
+        <artifactId>blok2</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>blok2</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>jdbc</module>
-    </modules>
+    <artifactId>jdbc</artifactId>
 
-    <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.1.0</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
 
 </project>
