@@ -13,7 +13,7 @@ public class PersonDao {
         EntityManager connection = createNewEntityManager();
 
         connection.getTransaction().begin();
-        connection.persist(p);
+        connection.merge(p);
         connection.getTransaction().commit();
 
         connection.close();
@@ -58,7 +58,14 @@ public class PersonDao {
     public void delete(Person p) {
         EntityManager connection = createNewEntityManager();
         connection.getTransaction().begin();
-        connection.remove(p);
+        // does not work: removes a detached instance
+        // connection.remove(p);
+
+        // Solution: first find by id, then remove THAT entity (that's managed)
+        Person person = connection.find(Person.class, p.getId());
+        if (person != null) {
+            connection.remove(person);
+        }
         connection.getTransaction().commit();
         connection.close();
     }
