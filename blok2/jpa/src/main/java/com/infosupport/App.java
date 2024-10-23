@@ -11,8 +11,11 @@ public class App {
     public static void main(String[] args) {
         Person bram = Person.builder().name("Bram").age(45).build();
 
+        em.getTransaction().begin();
         em.persist(bram);
+        em.getTransaction().commit();
 
-        Person person = em.find(Person.class, 1L);
+        Person person = em.find(Person.class, 1);
+        System.out.println(person);
     }
 }
