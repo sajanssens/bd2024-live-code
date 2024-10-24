@@ -1,5 +1,6 @@
 package com.infosupport.dao;
 
+import com.infosupport.domain.Department;
 import com.infosupport.domain.Person;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -99,5 +100,11 @@ public class PersonDao {
         em.getTransaction().commit();
         em.close();
         return person;
+    }
+
+    public List<Person> findByDepartment(Department d) {
+        return emf.createEntityManager()
+                .createQuery("select p from Person p where p.worksAt = :d", Person.class)
+                .getResultList();
     }
 }
