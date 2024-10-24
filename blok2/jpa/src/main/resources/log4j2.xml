@@ -33,9 +33,14 @@
 
         <Logger name="org.hibernate" level="INFO"/>
 
-        <!--<Logger name="org.hibernate.type.descriptor.sql" level="trace"/>-->
+        <!-- to show generated sql queries:-->
+        <Logger name="org.hibernate.SQL" level="DEBUG"/>
+        <!--<Logger name="org.hibernate.SQL_SLOW" level="DEBUG"/>-->
 
-        <Root level="DEBUG">
+        <!-- to show parameter values in queries:-->
+        <Logger name="org.hibernate.orm.jdbc.bind" level="TRACE"/>
+
+        <Root level="INFO">
             <AppenderRef ref="console"/>
             <AppenderRef ref="rollingFile"/>
         </Root>
