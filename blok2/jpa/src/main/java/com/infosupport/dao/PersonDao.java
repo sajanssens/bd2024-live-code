@@ -2,36 +2,48 @@ package com.infosupport.dao;
 
 import com.infosupport.domain.Person;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-import static com.infosupport.App.emf;
-
 public class PersonDao {
 
+    private static Logger log = LoggerFactory.getLogger(PersonDao.class);
+    // ...
+    private EntityManagerFactory emf;
+    // Type object;
+
+    public PersonDao(EntityManagerFactory emf /*, Type eenObject*/) {
+        this.emf = emf;
+        // this.object = eenObject;
+    }
+
     public void create(Person p) {
-        EntityManager connection = createNewEntityManager();
+        EntityManager em = emf.createEntityManager();
 
-        connection.getTransaction().begin();
-        connection.merge(p);
-        connection.getTransaction().commit();
+        log.debug("Creating person: " + p);
+        log.debug("begin transaction...");
 
-        connection.close();
+        em.getTransaction().begin();
+        em.persist(p);
+        em.getTransaction().commit();
+
+        log.debug("end transaction...");
+
+        em.close();
     }
 
     public Person read(int id) {
-        EntityManager connection = createNewEntityManager();
-        Person person = connection.find(Person.class, id);
-        connection.close();
+        EntityManager em = emf.createEntityManager();
+        Person person = em.find(Person.class, id);
+        em.close();
         return person;
     }
 
-    private static EntityManager createNewEntityManager() {
-        return emf.createEntityManager();
-    }
-
     public List<Person> findAll() {
-        EntityManager em = createNewEntityManager();
+        EntityManager em = emf.createEntityManager();
         List<Person> persons = em.createQuery("select p from Person p", Person.class)
                 .getResultList();
         em.close();
@@ -39,7 +51,7 @@ public class PersonDao {
     }
 
     public List<Person> findAllNamed() {
-        EntityManager em = createNewEntityManager();
+        EntityManager em = emf.createEntityManager();
         List<Person> persons = em.createNamedQuery("findAll", Person.class)
                 .getResultList();
         em.close();
@@ -47,7 +59,7 @@ public class PersonDao {
     }
 
     public List<Person> findBy(String name) {
-        try (EntityManager em = createNewEntityManager()) {
+        try (EntityManager em = emf.createEntityManager();) {
             List<Person> persons = em.createNamedQuery("findBy", Person.class)
                     .setParameter("n", name)
                     .getResultList();
@@ -56,26 +68,36 @@ public class PersonDao {
     }
 
     public void delete(Person p) {
-        EntityManager connection = createNewEntityManager();
-        connection.getTransaction().begin();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
         // does not work: removes a detached instance
         // connection.remove(p);
 
         // Solution: first find by id, then remove THAT entity (that's managed)
-        Person person = connection.find(Person.class, p.getId());
+        Person person = em.find(Person.class, p.getId());
         if (person != null) {
-            connection.remove(person);
+            em.remove(person);
         }
-        connection.getTransaction().commit();
-        connection.close();
+        em.getTransaction().commit();
+        em.close();
     }
 
     public Person update(Person p) {
-        EntityManager connection = createNewEntityManager();
-        connection.getTransaction().begin();
-        Person merge = connection.merge(p);
-        connection.getTransaction().commit();
-        connection.close();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Person merge = em.merge(p);
+        em.getTransaction().commit();
+        em.close();
         return merge;
+    }
+
+    public Person updateName(int id, String name) {
+        EntityManager em = emf.createEntityManager();
+        Person person = em.find(Person.class, id);
+        em.getTransaction().begin();
+        person.setName(name);
+        em.getTransaction().commit();
+        em.close();
+        return person;
     }
 }

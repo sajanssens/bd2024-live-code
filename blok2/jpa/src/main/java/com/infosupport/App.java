@@ -13,9 +13,17 @@ public class App {
 
     public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("MySQL");
 
-    private static PersonDao dao = new PersonDao();
+    private static PersonDao dao = new PersonDao(emf);
 
     public static void main(String[] args) {
+        // Logging demo: ---------------
+        log.error("ERROR");
+        log.warn("WARN");
+        log.info("INFO"); // jip en janneke logging voor de helpdesk
+        log.debug("DEBUG"); // technische logging voor developers
+        log.trace("TRACE"); // technische detail logging voor developers
+
+        // JPA: ---------------
         Person bram = Person.builder().name("Bram").age(45).build();
 
         dao.create(bram);
@@ -23,14 +31,10 @@ public class App {
         Person p1 = dao.read(1);
         log.debug("p1=" + p1);
 
-        log.error("ERROR");
-        log.warn("WARN");
-        log.info("INFO"); // jip en janneke logging voor de helpdesk
-        log.debug("DEBUG"); // technische logging voor developers
-        log.trace("TRACE"); // technische detail logging voor developers
-
         bram.setName("Bram Janssens");
         dao.update(bram);
+
+        dao.updateName(bram.getId(), "Mieke Janssens - bij de Vaate");
 
         Person p2 = dao.read(1);
         log.debug("p2=" + p2);
