@@ -23,7 +23,7 @@ class PersonDaoIT {
     }
 
     @Test
-    void create_withEntityManager_callsTransactionPersistAndClose() {
+    void createPersonAndChangeName_isCommittedToTheDatabase() {
         Person john = Person.builder().name("John").build();
 
         sut.create(john);
