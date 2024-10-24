@@ -9,11 +9,9 @@ import org.slf4j.LoggerFactory;
 
 public class App {
 
-    private static Logger log = LoggerFactory.getLogger(App.class);
-
-    public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("MySQL");
-
-    private static PersonDao dao = new PersonDao(emf);
+    private static final Logger log = LoggerFactory.getLogger(App.class);
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("MySQL");
+    private static final PersonDao dao = new PersonDao(emf);
 
     public static void main(String[] args) {
         // Logging demo: ---------------

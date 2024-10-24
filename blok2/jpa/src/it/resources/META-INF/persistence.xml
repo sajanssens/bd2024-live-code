@@ -14,7 +14,6 @@
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
         </properties>
 
     </persistence-unit>
