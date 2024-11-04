@@ -113,7 +113,8 @@ public class PersonDao {
 
     public List<Person> findByDepartment(Department d) {
         return emf.createEntityManager()
-                .createQuery("select p from Person p where p.worksAt = :d", Person.class)
+                .createQuery("select p from Person p where p.worksAt.id = :d", Person.class)
+                .setParameter("d", d.getId())
                 .getResultList();
     }
 }

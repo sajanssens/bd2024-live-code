@@ -2,7 +2,6 @@ package com.infosupport.domain;
 
 import com.infosupport.util.BooleanTFConverter;
 import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -18,11 +17,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.persistence.CascadeType.MERGE;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity @NoArgsConstructor
@@ -56,8 +57,8 @@ public class Person {
     @Embedded
     private Address address;
 
-    @Embedded
-    private Address addressWork;
+    // @Embedded
+    // private Address addressWork;
 
     @Lob // CLOB Character large object
     @Basic(fetch = LAZY) // only loaded when explicitly called (with getResume()) on a managed object.
@@ -72,13 +73,14 @@ public class Person {
 
     //  Relationships -------------------------------------------
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne(cascade = MERGE)
     private Department worksAt;
 
     @ManyToOne
-    private Clearance clearance; // beheerder
+    private Clearance clearance;
 
-    @ManyToMany @Builder.Default
+    @ManyToMany
+    @Builder.Default @ToString.Exclude
     private List<Course> courses = new ArrayList<>();
 
     public void setClearance(Clearance clearance) {
