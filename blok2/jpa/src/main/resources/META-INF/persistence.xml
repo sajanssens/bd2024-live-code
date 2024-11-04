@@ -12,6 +12,7 @@
             <property name="jakarta.persistence.jdbc.user" value="root"/>
             <property name="jakarta.persistence.jdbc.password" value="root"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="jakarta.persistence.validation.mode" value="AUTO"/>
         </properties>
 
     </persistence-unit>

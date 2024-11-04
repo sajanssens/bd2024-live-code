@@ -13,6 +13,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,6 +43,10 @@ public class Person {
 
     @Builder.Default
     private int age = 42;
+
+    // @Pattern(regexp = "....") // nóg een dep nodig: expressly
+    @Email // Bean validation API: twee deps: jakarta.validation-api en hibernate-validator
+    private String emailAddress;
 
     // Advanced features for single fields ----------------
 

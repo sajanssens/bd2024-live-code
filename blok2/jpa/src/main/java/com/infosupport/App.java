@@ -55,6 +55,9 @@ public class App {
         personDao.create(nine);
         personDao.create(jan);
 
+        jan.setEmailAddress("verkeerdformaat at gmail punt com");
+        personDao.update(jan);
+
         List<Person> ivMedewerkers = personDao.findByDepartment(iv);
         log.info("Bij IV werken: {}", ivMedewerkers);
 
