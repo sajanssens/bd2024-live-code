@@ -68,6 +68,15 @@ public class PersonDao {
         }
     }
 
+    public List<Person> findBy(Department department) {
+        EntityManager em = emf.createEntityManager();
+        List<Person> workers = em.createQuery("select p from Person p where p.worksAt.id = :departmentId", Person.class)
+                .setParameter("departmentId", department.getId())
+                .getResultList();
+        em.close();
+        return workers;
+    }
+
     public void delete(Person p) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

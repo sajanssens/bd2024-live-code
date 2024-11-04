@@ -84,7 +84,6 @@
     <build>
         <plugins>
             <!-- Make sure integration test classes end with 'IT' -->
-            <!-- Only integration tests: mvn integration-test -DskipUnitTests-->
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.22.2</version>
