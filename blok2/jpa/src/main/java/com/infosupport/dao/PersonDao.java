@@ -93,12 +93,18 @@ public class PersonDao {
     }
 
     public Person update(Person p) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Person merge = em.merge(p);
-        em.getTransaction().commit();
-        em.close();
-        return merge;
+        try (EntityManager em = emf.createEntityManager()) {
+            try {
+                em.getTransaction().begin();
+                Person merge = em.merge(p);
+                em.flush();
+                em.getTransaction().commit();
+                return merge;
+            } catch (Exception e) {
+                em.getTransaction().rollback();
+                throw e;
+            }
+        }
     }
 
     public Person updateName(int id, String name) {

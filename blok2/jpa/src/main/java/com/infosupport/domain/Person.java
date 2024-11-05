@@ -1,7 +1,10 @@
 package com.infosupport.domain;
 
 import com.infosupport.util.BooleanTFConverter;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -62,8 +65,14 @@ public class Person {
     @Embedded
     private Address address;
 
-    // @Embedded
-    // private Address addressWork;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "street", column = @Column(name = "workStreet")),
+            @AttributeOverride(name = "houseNumber", column = @Column(name = "workHouseNumber")),
+            @AttributeOverride(name = "zip", column = @Column(name = "workZip")),
+            @AttributeOverride(name = "city", column = @Column(name = "workCity"))
+    })
+    private Address addressWork;
 
     @Lob // CLOB Character large object
     @Basic(fetch = LAZY) // only loaded when explicitly called (with getResume()) on a managed object.

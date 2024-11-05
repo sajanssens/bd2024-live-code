@@ -5,7 +5,7 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class Address {
     private String street;
-    private Integer housenumber;
+    private Integer houseNumber;
     private String zip;
     private String city;
 }

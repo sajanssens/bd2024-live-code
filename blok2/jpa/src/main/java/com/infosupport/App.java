@@ -2,10 +2,14 @@ package com.infosupport;
 
 import com.infosupport.dao.DepartmentDao;
 import com.infosupport.dao.PersonDao;
+import com.infosupport.domain.ContactType;
 import com.infosupport.domain.Department;
 import com.infosupport.domain.Person;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +32,12 @@ public class App {
         log.trace("TRACE"); // otechnische detail logging vor developers
 
         // JPA: ---------------
-        Person bram = Person.builder().name("Bram").birthdate(LocalDate.of(1979, 8, 22)).age(45).build();
+        Person bram = Person.builder()
+                .name("Bram")
+                .birthdate(LocalDate.of(1979, 8, 22))
+                .age(45)
+                .type(ContactType.NORMAL)
+                .build();
 
         personDao.create(bram);
 
@@ -55,12 +64,26 @@ public class App {
         personDao.create(nine);
         personDao.create(jan);
 
-        jan.setEmailAddress("verkeerdformaat at gmail punt com");
-        personDao.update(jan);
-
         List<Person> ivMedewerkers = personDao.findByDepartment(iv);
         log.info("Bij IV werken: {}", ivMedewerkers);
 
         // dao.delete(bram);
+
+        // Validation demo: ---------------
+        jan.setEmailAddress("verkeerdformaat at gmail punt com");
+        // Validation by JPA/Hibernate:
+        try {
+            personDao.update(jan);
+        } catch (ConstraintViolationException e) {
+            var violations = e.getConstraintViolations();
+            for (var v : violations) {
+                log.error("Validation error:  {} {}, {}.", v.getPropertyPath(), v.getMessage(), v.getRootBeanClass());
+            }
+        }
+
+        // Programmatic validation:
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        var violations = validator.validate(jan);
+        violations.forEach(v -> log.error("Validation error:  {} {}, {}.", v.getPropertyPath(), v.getMessage(), v.getRootBeanClass()));
     }
 }
