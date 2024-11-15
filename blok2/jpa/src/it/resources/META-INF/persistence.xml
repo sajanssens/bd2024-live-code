@@ -17,4 +17,24 @@
         </properties>
     </persistence-unit>
 
+    <persistence-unit name="MySQL-testcontainer">
+        <class>com.infosupport.domain.Person</class>
+        <class>com.infosupport.domain.Department</class>
+        <class>com.infosupport.domain.Clearance</class>
+        <class>com.infosupport.domain.Address</class>
+        <class>com.infosupport.domain.ContactType</class>
+        <class>com.infosupport.domain.Course</class>
+        <class>com.infosupport.domain.Team</class>
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="${DB_URL}"/>
+            <property name="jakarta.persistence.jdbc.user" value="${DB_USER}"/>
+            <property name="jakarta.persistence.jdbc.password" value="${DB_PASSWORD}"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="jakarta.persistence.validation.mode" value="AUTO"/>
+        </properties>
+
+    </persistence-unit>
+
 </persistence>
