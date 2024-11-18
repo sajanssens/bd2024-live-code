@@ -25,7 +25,6 @@ class Player extends Person {
 }
 
 
-
 class RouletteBoard {
     constructor() {
         /**
@@ -46,11 +45,12 @@ class RouletteBoard {
             this.bets.push(record);
         }
         record.numberOfChips++;
+        return this;
     }
 
     play() {
         const winningNumber = Math.floor(Math.random() * 36)
-
+        console.log(`The winningNumber is ${winningNumber}`);
         this.bets
             .filter(b => b.bet === winningNumber)
             .forEach(b => {
@@ -68,15 +68,13 @@ const playerTwo = new Player('Leia', 68);
 const highestNumberOfChips = Math.max(playerOne.chips, playerTwo.chips);
 console.log(highestNumberOfChips + ' is the highest number of chips');
 
-const roulette = new RouletteBoard();
-
-roulette.placeBetOneChip(playerOne, 20);
-roulette.placeBetOneChip(playerOne, 20);
-roulette.placeBetOneChip(playerTwo, 1);
-roulette.placeBetOneChip(playerTwo, 20);
-roulette.placeBetOneChip(playerTwo, 6);
-roulette.placeBetOneChip(playerTwo, 31);
-roulette.placeBetOneChip(playerTwo, 5);
-roulette.placeBetOneChip(playerTwo, 4);
-
-roulette.play();
+new RouletteBoard()
+    .placeBetOneChip(playerOne, 20)
+    .placeBetOneChip(playerOne, 20)
+    .placeBetOneChip(playerTwo, 1)
+    .placeBetOneChip(playerTwo, 20)
+    .placeBetOneChip(playerTwo, 6)
+    .placeBetOneChip(playerTwo, 31)
+    .placeBetOneChip(playerTwo, 5)
+    .placeBetOneChip(playerTwo, 4)
+    .play();

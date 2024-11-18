@@ -3,3 +3,12 @@ let inputFromBackend = JSON.parse('{"naam": "XYZ", "firstName": "Bram", "age": 4
 // let bramToo: Person = inputFromBackend
 console.log(inputFromBackend.firstName);
 console.log(inputFromBackend.age);
+class Human {
+    constructor() {
+        this.firstName = "";
+        this.age = 43;
+    }
+    calculateAge() {
+        throw new Error("Method not implemented.");
+    }
+}
