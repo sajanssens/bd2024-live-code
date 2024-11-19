@@ -39,3 +39,4 @@ build/
 /.idea/
 /logs/
 /blok2/jpa/logs/
+/blok3/ts/output/
