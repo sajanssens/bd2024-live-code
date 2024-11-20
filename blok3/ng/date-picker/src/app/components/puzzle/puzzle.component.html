@@ -1,0 +1,6 @@
+@for (p of puzzles; track p.id) {
+  <p>{{ p.vraag }} </p>
+  <p>Antwoord: {{ p.antwoord }}</p>
+  <p>-----------</p>
+}
+<button (click)="home()">go home</button>

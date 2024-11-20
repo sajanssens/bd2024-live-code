@@ -19,10 +19,9 @@ export class DatePickerComponent {
   name = "world"
   contacts: Contact[];
 
-  constructor(private contactService: ContactService) {
+  constructor(contactService: ContactService) {
     this.contacts = contactService.getAll()
   }
-
 
   delete(contactToDelete: Contact) {
     this.contacts.splice(this.contacts.indexOf(contactToDelete), 1);

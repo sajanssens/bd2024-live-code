@@ -4,13 +4,15 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 import {PuzzleService} from "../../services/puzzle.service";
 import {Puzzle} from "../../model/Puzzle";
 import {PuzzleComponent} from "../puzzle/puzzle.component";
+import {HelloPipe} from "../../pipes/hello.pipe";
 
 @Component({
   selector: 'app-binding-demo',
   standalone: true,
   imports: [
     FormsModule,
-    PuzzleComponent
+    PuzzleComponent,
+    HelloPipe
   ],
   templateUrl: './binding-demo.component.html',
   styleUrl: './binding-demo.component.scss'

@@ -1,5 +1,5 @@
 Naam: <input type="text" [(ngModel)]="nameInput"><BR>
 
-<div style="height: 30px"><p [hidden]="mustHide()">Welkom {{ nameInput }}!</p></div>
-<div class="btn btn-warning" (click)="toggleHide()">Hide</div>
+<div style="height: 30px"><p [hidden]="mustHide()">{{ nameInput | hello: '!' }}</p></div>
+<div class="btn btn-warning" (click)="toggleHide()"><i class="bi bi-eye"></i></div>
 <p>Id is: {{ id }}</p>
