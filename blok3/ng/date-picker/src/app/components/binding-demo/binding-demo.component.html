@@ -1,9 +1,5 @@
 Naam: <input type="text" [(ngModel)]="nameInput"><BR>
 
 <div style="height: 30px"><p [hidden]="mustHide()">Welkom {{ nameInput }}!</p></div>
-<div (click)="toggleHide()" class="btn btn-warning">HIDE</div>
+<div class="btn btn-warning" (click)="toggleHide()">Hide</div>
 <p>Id is: {{ id }}</p>
-
-@for (p of puzzles; track p.id) {
-  <p>{{ p.vraag }} = {{ p.antwoord }}</p>
-}

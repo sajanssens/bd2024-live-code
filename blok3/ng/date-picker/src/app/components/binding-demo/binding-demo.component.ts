@@ -3,12 +3,14 @@ import {FormsModule} from "@angular/forms";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {PuzzleService} from "../../services/puzzle.service";
 import {Puzzle} from "../../model/Puzzle";
+import {PuzzleComponent} from "../puzzle/puzzle.component";
 
 @Component({
   selector: 'app-binding-demo',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    PuzzleComponent
   ],
   templateUrl: './binding-demo.component.html',
   styleUrl: './binding-demo.component.scss'
@@ -17,7 +19,6 @@ export class BindingDemoComponent {
   nameInput = "";
   hide = false
   id = '0';
-  puzzles: Puzzle[];
 
   constructor(private route: ActivatedRoute, private puzzleService: PuzzleService) {
     // static way:
@@ -25,8 +26,6 @@ export class BindingDemoComponent {
 
     // dynamic i.e. reactive way:
     this.route.paramMap.subscribe((params: ParamMap) => this.id = params.get("id") ?? '0')
-
-    this.puzzles = this.puzzleService.getAll();
   }
 
   toggleHide() {
