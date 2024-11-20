@@ -5,8 +5,8 @@ function hello() {
 
 console.log("JO.")
 
-// Show the modal after 5 seconds
+// Show the modal after 1 seconds
 setTimeout(() => {
     const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
     modal.show();
-}, 1000); // 5000 ms = 5 seconds
+}, 1000);

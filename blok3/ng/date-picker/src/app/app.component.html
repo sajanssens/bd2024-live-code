@@ -1,0 +1,30 @@
+<div class="container">
+  <h1 class="display-1">Date picker</h1>
+  <p class="lead">Pick your date like a pro</p>
+  <h3>Contacts</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th colspan="2">E-mail address</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (contact of contacts; track contact.id) {
+        <tr>
+          <td class="row align-items-center" [style.background-color]="contact.colorCode">
+            <div class="col-auto">
+              <input class="form-control form-control-color" type="color" [(ngModel)]="contact.colorCode" />
+            </div>
+            <div class="col-auto">{{contact.firstName}} {{contact.surname}}</div>
+          </td>
+          <td [style.background-color]="contact.colorCode">{{contact.email}}</td>
+          <td [style.background-color]="contact.colorCode">
+            <button class="btn btn-secondary me-2">Edit</button>
+            <button class="btn btn-danger" (click)="delete(contact)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
