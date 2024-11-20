@@ -1,27 +1,22 @@
 import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {Contact} from "./model/Contact";
-import {FormsModule} from "@angular/forms";
+import {DatePickerComponent} from "./components/date-picker/date-picker.component";
+import {BindingDemoComponent} from "./components/binding-demo/binding-demo.component";
+import {MenubarComponent} from "./components/menubar/menubar.component";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule],
   templateUrl: './app.component.html',
+  imports: [
+    DatePickerComponent,
+    BindingDemoComponent,
+    MenubarComponent,
+    RouterOutlet
+  ],
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  name = "world"
-
-  contacts: Contact[] = [
-    {id: 4, firstName: 'Sam', surname: 'Smith', email: 'sam.smith@music.com'},
-    {id: 8, firstName: 'Frank', surname: 'Muscles', email: 'frank@muscles.com'},
-    {id: 15, firstName: 'Eddy', surname: 'Valentino', email: 'eddy@valfam.co.uk'},
-  ];
-
-  delete(contactToDelete: Contact) {
-    this.contacts.splice(this.contacts.indexOf(contactToDelete), 1);
-  }
 
 
 }

@@ -1,0 +1,4 @@
+Naam: <input type="text" [(ngModel)]="nameInput">
+
+<p [hidden]="nameInput==='' || hide">Welkom {{ nameInput }}!</p>
+<div (click)="toggleHide()">HIDE</div>
