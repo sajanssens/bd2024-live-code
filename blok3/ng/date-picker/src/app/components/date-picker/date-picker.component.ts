@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {Contact} from "../../model/Contact";
+import {ContactService} from "../../services/contact.service";
 
 @Component({
   selector: 'app-date-picker',
@@ -13,12 +14,12 @@ import {Contact} from "../../model/Contact";
 })
 export class DatePickerComponent {
   name = "world"
+  contacts: Contact[];
 
-  contacts: Contact[] = [
-    {id: 4, firstName: 'Sam', surname: 'Smith', email: 'sam.smith@music.com'},
-    {id: 8, firstName: 'Frank', surname: 'Muscles', email: 'frank@muscles.com'},
-    {id: 15, firstName: 'Eddy', surname: 'Valentino', email: 'eddy@valfam.co.uk'},
-  ];
+  constructor(private contactService: ContactService) {
+    this.contacts = contactService.getAll()
+  }
+
 
   delete(contactToDelete: Contact) {
     this.contacts.splice(this.contacts.indexOf(contactToDelete), 1);
