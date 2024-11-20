@@ -4,6 +4,13 @@ import {BindingDemoComponent} from "./components/binding-demo/binding-demo.compo
 
 export const routes: Routes = [
   {path: '', component: DatePickerComponent},
-  {path: 'date', component: DatePickerComponent},
-  {path: 'binding', component: BindingDemoComponent}
+  {
+    path: 'date', component: DatePickerComponent,
+    children: [
+      {path: 'subbinding/:id', component: BindingDemoComponent}
+    ]
+  },
+  {path: 'binding', component: BindingDemoComponent},
+  {path: 'binding/:id', component: BindingDemoComponent},
+
 ];

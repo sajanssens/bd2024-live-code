@@ -2,12 +2,15 @@ import {Component} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {Contact} from "../../model/Contact";
 import {ContactService} from "../../services/contact.service";
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-date-picker',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    RouterLink,
+    RouterOutlet
   ],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss'

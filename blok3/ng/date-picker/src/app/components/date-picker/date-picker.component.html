@@ -19,10 +19,11 @@
         </td>
         <td [style.background-color]="contact.colorCode">{{contact.email}}</td>
         <td [style.background-color]="contact.colorCode">
-          <button class="btn btn-secondary me-2">Edit</button>
+          <button class="btn btn-secondary me-2" routerLink="subbinding/{{contact.id}}">Edit</button>
           <button class="btn btn-danger" (click)="delete(contact)">Delete</button>
         </td>
       </tr>
     }
   </tbody>
 </table>
+<router-outlet></router-outlet>
