@@ -5,6 +5,7 @@ import {MenubarComponent} from "./components/menubar/menubar.component";
 import {RouterOutlet} from "@angular/router";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatBadgeModule} from "@angular/material/badge";
+import {SidebarComponent} from "./components/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import {MatBadgeModule} from "@angular/material/badge";
     MenubarComponent,
     RouterOutlet,
     MatSlideToggleModule,
-    MatBadgeModule
+    MatBadgeModule,
+    SidebarComponent
   ],
   styleUrl: './app.component.scss'
 })

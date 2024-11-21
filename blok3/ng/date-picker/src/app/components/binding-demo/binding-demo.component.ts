@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {PuzzleService} from "../../services/puzzle.service";
 import {PuzzleComponent} from "../puzzle/puzzle.component";
 import {HelloPipe} from "../../pipes/hello.pipe";
