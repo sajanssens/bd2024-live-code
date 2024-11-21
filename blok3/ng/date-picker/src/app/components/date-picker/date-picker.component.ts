@@ -21,11 +21,19 @@ export class DatePickerComponent {
   name = "world"
   contacts: Contact[];
 
-  constructor(contactService: ContactService) {
+  editingContact: Contact = {} as Contact
+
+  constructor(private contactService: ContactService) {
     this.contacts = contactService.getAll()
   }
 
   delete(contactToDelete: Contact) {
     this.contacts.splice(this.contacts.indexOf(contactToDelete), 1);
   }
+
+  edit(contact: Contact) {
+    this.editingContact = contact;
+  }
+
+
 }

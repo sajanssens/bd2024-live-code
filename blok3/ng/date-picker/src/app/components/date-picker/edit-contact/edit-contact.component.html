@@ -1,0 +1,32 @@
+<h3 class="mb-3">Edit</h3>
+<form #contactForm="ngForm" (ngSubmit)="save()">
+  <div class="row mb-3">
+    <label for="nameInput" class="form-label col-md-3">First name</label>
+    <div class="col">
+      <input id="nameInput" required minlength="2" name="firstName"
+             [(ngModel)]="firstName"
+             type="text" class="form-control"/>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="surnameInput" class="form-label col-md-3">Surname</label>
+    <div class="col">
+      <input id="surnameInput" required minlength="2" name="surname"
+             [(ngModel)]="surname"
+             type="text" class="form-control col" />
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="emailInput" class="form-label col-md-3">E-mail address</label>
+    <div class="col">
+      <input id="emailInput" required pattern=".+@.+\..+" name="email"
+             [(ngModel)]="email"
+             type="text" class="form-control col" />
+    </div>
+  </div>
+  <div class="mb-3">
+    <button type="submit" [disabled]="!contactForm.valid" class="btn btn-primary offset-md-3">
+      Ok
+    </button>
+  </div>
+</form>
