@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Contact} from "../model/Contact";
-import {Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {Observable, Subject} from "rxjs";
 export class ContactService {
 
   contacts: Contact[];
-  #contactsAreUpdated = new Subject<Contact[]>();
+  #contactsAreUpdated: BehaviorSubject<Contact[]>;
 
   constructor() {
     this.contacts = [
@@ -16,18 +16,25 @@ export class ContactService {
       {id: 8, firstName: 'Frank', surname: 'Muscles', email: 'frank@muscles.com'},
       {id: 15, firstName: 'Eddy', surname: 'Valentino', email: 'eddy@valfam.co.uk'},
     ];
+
+    this.#contactsAreUpdated = new BehaviorSubject<Contact[]>(this.contacts)
   }
 
-  get $contactsAreUpdated(): Observable<Contact[]> {
+  get contactsAreUpdated$(): Observable<Contact[]> {
     return this.#contactsAreUpdated
   }
 
-  getAll(): Contact[] {
-    return this.contacts;
+  getAll() {
+    this.refresh()
+  }
+
+  refresh() {
+    this.#contactsAreUpdated.next(this.contacts)
   }
 
   add(newContact: Contact) {
-    this.contacts.push({...newContact});
+    this.contacts.push(newContact);
+    this.refresh()
   }
 
   save(editingContact: Contact) {
@@ -37,6 +44,12 @@ export class ContactService {
       find.surname = editingContact.surname
       find.email = editingContact.email
     }
+    this.refresh()
+  }
+
+  delete(contactToDelete: Contact) {
+    this.contacts.splice(this.contacts.indexOf(contactToDelete), 1);
+    this.refresh()
   }
 
   get(id: string): Contact {

@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {ContactService} from "../../../services/contact.service";
 import {Contact} from "../../../model/Contact";
 import {FormsModule} from "@angular/forms";
+import {Location as Loc} from '@angular/common';
+
 
 @Component({
   selector: 'app-edit-contact',
@@ -19,7 +21,7 @@ export class EditContactComponent {
   surname = '';
   email = '';
 
-  constructor(private route: ActivatedRoute, private contactService: ContactService) {
+  constructor(private route: ActivatedRoute, private contactService: ContactService, private location: Loc) {
     this.route.paramMap.subscribe((params) => {
         this.id = params.get("id") ?? '0'
         let contact = this.contactService.get(this.id)
@@ -39,6 +41,11 @@ export class EditContactComponent {
     };
 
     this.contactService.save(contact);
+    this.back()
+  }
+
+  private back() {
+    this.location.back()
   }
 
 }

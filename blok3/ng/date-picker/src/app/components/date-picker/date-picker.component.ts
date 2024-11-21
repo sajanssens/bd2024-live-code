@@ -1,9 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {Contact} from "../../model/Contact";
 import {ContactService} from "../../services/contact.service";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {Observable} from "rxjs";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: 'app-date-picker',
@@ -12,27 +14,27 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     FormsModule,
     RouterLink,
     RouterOutlet,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    AsyncPipe
   ],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss'
 })
-export class DatePickerComponent {
-  name = "world"
-  contacts: Contact[];
+export class DatePickerComponent implements OnInit {
 
-  editingContact: Contact = {} as Contact
+  contacts!: Contact[];
+  contacts$!: Observable<Contact[]>;
 
   constructor(private contactService: ContactService) {
-    this.contacts = contactService.getAll()
+  }
+
+  ngOnInit(): void {
+    this.contacts$ = this.contactService.contactsAreUpdated$
+    this.contactService.getAll()
   }
 
   delete(contactToDelete: Contact) {
-    this.contacts.splice(this.contacts.indexOf(contactToDelete), 1);
-  }
-
-  edit(contact: Contact) {
-    this.editingContact = contact;
+    this.contactService.delete(contactToDelete)
   }
 
 
