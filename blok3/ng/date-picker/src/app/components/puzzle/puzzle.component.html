@@ -1,6 +1,11 @@
-@for (p of puzzles; track p.id) {
-  <p>{{ p.vraag }} </p>
-  <p>Antwoord: {{ p.antwoord }}</p>
-  <p>-----------</p>
-}
-<button (click)="home()">go home</button>
+<span (click)="home()" class="btn btn-secondary m-1"><i class="bi bi-house-up-fill"></i> Home</span>
+<div>
+  <h3>Puzzles</h3>
+  <div>
+    @for (p of puzzles; track p.id) {
+      <p>{{ p.vraag }} </p>
+      <p>Antwoord: {{ p.antwoord }}</p>
+      <p>-----------</p>
+    }
+  </div>
+</div>

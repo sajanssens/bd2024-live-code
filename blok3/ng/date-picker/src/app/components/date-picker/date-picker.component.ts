@@ -3,6 +3,7 @@ import {FormsModule} from "@angular/forms";
 import {Contact} from "../../model/Contact";
 import {ContactService} from "../../services/contact.service";
 import {RouterLink, RouterOutlet} from "@angular/router";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @Component({
   selector: 'app-date-picker',
@@ -10,7 +11,8 @@ import {RouterLink, RouterOutlet} from "@angular/router";
   imports: [
     FormsModule,
     RouterLink,
-    RouterOutlet
+    RouterOutlet,
+    MatSlideToggleModule
   ],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss'

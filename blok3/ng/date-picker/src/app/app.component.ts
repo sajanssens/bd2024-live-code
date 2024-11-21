@@ -3,6 +3,8 @@ import {DatePickerComponent} from "./components/date-picker/date-picker.componen
 import {BindingDemoComponent} from "./components/binding-demo/binding-demo.component";
 import {MenubarComponent} from "./components/menubar/menubar.component";
 import {RouterOutlet} from "@angular/router";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatBadgeModule} from "@angular/material/badge";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,9 @@ import {RouterOutlet} from "@angular/router";
     DatePickerComponent,
     BindingDemoComponent,
     MenubarComponent,
-    RouterOutlet
+    RouterOutlet,
+    MatSlideToggleModule,
+    MatBadgeModule
   ],
   styleUrl: './app.component.scss'
 })
