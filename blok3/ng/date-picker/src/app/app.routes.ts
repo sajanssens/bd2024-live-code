@@ -6,9 +6,8 @@ import {PuzzleComponent} from "./components/puzzle/puzzle.component";
 export const routes: Routes = [
   {path: '', component: DatePickerComponent},
   {
-    path: 'date', component: DatePickerComponent,
-    children: [
-      {path: 'subbinding/:id', component: BindingDemoComponent}
+    path: 'date', component: DatePickerComponent, children: [ // sub router-outlet maken in datepickercomponent
+      {path: 'binding/:id', component: BindingDemoComponent}
     ]
   },
   {path: 'binding', component: BindingDemoComponent},
