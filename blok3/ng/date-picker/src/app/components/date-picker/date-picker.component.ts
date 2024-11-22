@@ -31,6 +31,9 @@ export class DatePickerComponent implements OnInit {
   ngOnInit(): void {
     this.contacts$ = this.contactService.contactsAreUpdated$
     this.contactService.getAll()
+    // this.contacts$.subscribe(contacts => {
+    //   this.contacts = contacts
+    // })
   }
 
   delete(contactToDelete: Contact) {

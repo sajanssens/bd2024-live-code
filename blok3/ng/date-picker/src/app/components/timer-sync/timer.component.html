@@ -1,0 +1,9 @@
+<p>The dates are:</p>
+<button (click)="getTimes()">start timer</button>
+<button>click me</button>
+<input type="text" value="type something">
+@for (date of dates; track date) {
+  <p>{{ date.toLocaleTimeString() }}</p>
+}
+
+

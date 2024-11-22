@@ -4,6 +4,8 @@ import {BindingDemoComponent} from "./components/binding-demo/binding-demo.compo
 import {PuzzleComponent} from "./components/puzzle/puzzle.component";
 import {HomeComponent} from "./pages/home/home.component";
 import {EditContactComponent} from "./components/date-picker/edit-contact/edit-contact.component";
+import {TimerComponent} from "./components/timer-sync/timer.component";
+import {TimesPage} from "./pages/times/times.page";
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,5 +17,6 @@ export const routes: Routes = [
   {path: 'binding', component: BindingDemoComponent},
   {path: 'binding/:id', component: BindingDemoComponent},
   {path: 'puzzles', component: PuzzleComponent},
+  {path: 'times', component: TimesPage},
 
 ];

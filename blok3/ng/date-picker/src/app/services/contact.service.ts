@@ -24,7 +24,7 @@ export class ContactService {
     return this.#contactsAreUpdated
   }
 
-  getAll() {
+  getAll(): void {
     this.refresh()
   }
 
