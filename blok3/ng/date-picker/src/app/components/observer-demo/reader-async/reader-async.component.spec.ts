@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TimerAsyncComponent } from './timer-async.component';
+import { ReaderAsyncComponent } from './reader-async.component';
 
-describe('TimerAsyncComponent', () => {
-  let component: TimerAsyncComponent;
-  let fixture: ComponentFixture<TimerAsyncComponent>;
+describe('ReaderAsyncComponent', () => {
+  let component: ReaderAsyncComponent;
+  let fixture: ComponentFixture<ReaderAsyncComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TimerAsyncComponent]
+      imports: [ReaderAsyncComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TimerAsyncComponent);
+    fixture = TestBed.createComponent(ReaderAsyncComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
