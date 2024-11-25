@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ContactService} from "../../../services/contact.service";
 import {Contact} from "../../../model/Contact";
 import {FormsModule} from "@angular/forms";
@@ -20,12 +20,12 @@ export class EditContactComponent {
   firstName = '';
   surname = '';
   email = '';
-  editmode = false;
+  editmode = true;
 
-  constructor(private route: ActivatedRoute, private contactService: ContactService, private location: Loc) {
+  constructor(private route: ActivatedRoute, private contactService: ContactService, private location: Loc, private router: Router) {
     this.route.paramMap.subscribe((params) => {
         this.id = params.get("id") ?? '0'
-        this.editmode = +this.id == 0
+        this.editmode = +this.id > 0
         const contact = this.contactService.get(this.id)
         this.firstName = contact.firstName;
         this.surname = contact.surname;
@@ -41,13 +41,16 @@ export class EditContactComponent {
       surname: this.surname,
       email: this.email
     };
+    if (this.editmode)
+      this.contactService.save(contact);
+    else
+      this.contactService.add(contact);
 
-    this.contactService.save(contact);
     this.back()
   }
 
   private back() {
-    this.location.back()
+    this.router.navigate(['date'])
   }
 
 }

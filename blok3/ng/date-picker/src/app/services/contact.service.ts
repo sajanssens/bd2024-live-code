@@ -24,8 +24,10 @@ export class ContactService {
     this.#contactsAreUpdated.next(this.#contacts)
   }
 
+  private readonly _url = 'http://localhost:3000/';
+
   getAll(): void {
-    this.httpClient.get<Contact[]>('http://localhost:3000/contacts')
+    this.httpClient.get<Contact[]>(this._url + 'contacts')
       .subscribe(contactsFromBackend => {
           this.#contacts = contactsFromBackend
           this.sendRefresh()
@@ -34,38 +36,41 @@ export class ContactService {
   }
 
   add(newContact: Contact) {
-    this.httpClient.post<Contact>('http://localhost:3000/contacts', newContact)
-      .subscribe(addedContacts =>
-        this.updateCachedContacts(addedContacts)
-      )
+    this.httpClient.post<Contact>(this._url + 'contacts', newContact)
+      .subscribe(addedContact => {
+        this.#contacts.push(addedContact)
+        this.sendRefresh()
+      })
   }
 
   save(editingContact: Contact) {
-    this.httpClient.put<Contact>(`http://localhost:3000/contacts/${editingContact.id}`, editingContact)
-      .subscribe(editedContact =>
-        this.updateCachedContacts(editedContact)
+    this.httpClient.put<Contact>(this._url + `contacts/${editingContact.id}`, editingContact)
+      .subscribe(editedContact => {
+          this.replaceInContacts(editedContact)
+          this.sendRefresh()
+        }
       )
   }
 
   delete(contactToDelete: Contact) {
-    this.httpClient.delete<Contact>(`http://localhost:3000/contacts/${contactToDelete.id}`)
+    this.httpClient.delete<Contact>(this._url + `contacts/${contactToDelete.id}`)
       .subscribe(c => {
-        this.#contacts.splice(this.#contacts.indexOf(c), 1)
-        this.sendRefresh()
-      })
+          this.#contacts.splice(this.#contacts.indexOf(c), 1)
+          this.sendRefresh()
+        }
+      )
   }
 
   get(id: string): Contact {
     return this.#contacts.filter(c => c.id === +id)[0];
   }
 
-  private updateCachedContacts(contact: Contact) {
+  private replaceInContacts(contact: Contact) {
     const find = this.#contacts.find(c => c.id === contact.id);
     if (find) {
       find.firstName = contact.firstName
       find.surname = contact.surname
       find.email = contact.email
     }
-    this.sendRefresh()
   }
 }
