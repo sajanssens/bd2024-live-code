@@ -20,11 +20,13 @@ export class EditContactComponent {
   firstName = '';
   surname = '';
   email = '';
+  editmode = false;
 
   constructor(private route: ActivatedRoute, private contactService: ContactService, private location: Loc) {
     this.route.paramMap.subscribe((params) => {
         this.id = params.get("id") ?? '0'
-        let contact = this.contactService.get(this.id)
+        this.editmode = +this.id == 0
+        const contact = this.contactService.get(this.id)
         this.firstName = contact.firstName;
         this.surname = contact.surname;
         this.email = contact.email;

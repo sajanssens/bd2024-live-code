@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {interval, map, Observable, Subject, take} from "rxjs";
+import {interval, map, Subject, take} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
   #messages = '';
-  #messages$: Observable<string> = new Subject<string>();
+  #messages$: Subject<string> = new Subject<string>();
 
   private readonly amount = 10;
   private readonly speed = 500;
@@ -28,14 +28,16 @@ export class MessageService {
   }
 
   tickStart(): void {
-    this.#messages$ =
-      interval(this.speed)
-        .pipe(
-          map(() => new Date().toISOString()),
-          take(this.amount));
+    interval(this.speed)
+      .pipe(
+        map(() => new Date().toISOString()),
+        take(this.amount))
+      .subscribe(
+        dates => this.#messages$.next(dates)
+      );
   }
 
-  get messages$(): Observable<string> {
+  get messages$(): Subject<string> {
     return this.#messages$;
   }
 

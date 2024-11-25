@@ -4,7 +4,7 @@ import {Contact} from "../../model/Contact";
 import {ContactService} from "../../services/contact.service";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 
 @Component({
@@ -23,7 +23,7 @@ import {AsyncPipe} from "@angular/common";
 export class DatePickerComponent implements OnInit {
 
   // contacts!: Contact[];
-  contacts$!: Observable<Contact[]>;
+  contacts$!: BehaviorSubject<Contact[]>;
 
   constructor(private contactService: ContactService) {
   }

@@ -8,59 +8,64 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ContactService {
 
-  contacts: Contact[];
+  #contacts: Contact[];
   #contactsAreUpdated: BehaviorSubject<Contact[]>;
 
   constructor(private httpClient: HttpClient) {
-    this.contacts = [
-      // {id: 4, firstName: 'Sam', surname: 'Smith', email: 'sam.smith@music.com'},
-      // {id: 8, firstName: 'Frank', surname: 'Muscles', email: 'frank@muscles.com'},
-      // {id: 15, firstName: 'Eddy', surname: 'Valentino', email: 'eddy@valfam.co.uk'},
-    ];
-
-    this.#contactsAreUpdated = new BehaviorSubject<Contact[]>(this.contacts)
+    this.#contacts = [];
+    this.#contactsAreUpdated = new BehaviorSubject<Contact[]>(this.#contacts)
   }
-
 
   get contactsAreUpdated$(): BehaviorSubject<Contact[]> {
     return this.#contactsAreUpdated
   }
 
-  refresh() {
-    this.#contactsAreUpdated.next(this.contacts)
+  sendRefresh() {
+    this.#contactsAreUpdated.next(this.#contacts)
   }
 
   getAll(): void {
-    const response$ = this.httpClient.get<Contact[]>('http://localhost:3000/contacts');
-    response$.subscribe(
-      contactsFromBackend => this.contactsAreUpdated$.next(contactsFromBackend)
-    )
-    // this.refresh()
+    this.httpClient.get<Contact[]>('http://localhost:3000/contacts')
+      .subscribe(contactsFromBackend => {
+          this.#contacts = contactsFromBackend
+          this.sendRefresh()
+        }
+      )
   }
 
   add(newContact: Contact) {
     this.httpClient.post<Contact>('http://localhost:3000/contacts', newContact)
-      .subscribe(() => this.getAll())
-    // this.contacts.push(newContact);
-    // this.refresh()
+      .subscribe(addedContacts =>
+        this.updateCachedContacts(addedContacts)
+      )
   }
 
   save(editingContact: Contact) {
-    const find = this.contacts.find(c => c.id === editingContact.id);
-    if (find) {
-      find.firstName = editingContact.firstName
-      find.surname = editingContact.surname
-      find.email = editingContact.email
-    }
-    this.refresh()
+    this.httpClient.put<Contact>(`http://localhost:3000/contacts/${editingContact.id}`, editingContact)
+      .subscribe(editedContact =>
+        this.updateCachedContacts(editedContact)
+      )
   }
 
   delete(contactToDelete: Contact) {
-    this.contacts.splice(this.contacts.indexOf(contactToDelete), 1);
-    this.refresh()
+    this.httpClient.delete<Contact>(`http://localhost:3000/contacts/${contactToDelete.id}`)
+      .subscribe(c => {
+        this.#contacts.splice(this.#contacts.indexOf(c), 1)
+        this.sendRefresh()
+      })
   }
 
   get(id: string): Contact {
-    return this.contacts.filter(c => c.id === +id)[0];
+    return this.#contacts.filter(c => c.id === +id)[0];
+  }
+
+  private updateCachedContacts(contact: Contact) {
+    const find = this.#contacts.find(c => c.id === contact.id);
+    if (find) {
+      find.firstName = contact.firstName
+      find.surname = contact.surname
+      find.email = contact.email
+    }
+    this.sendRefresh()
   }
 }
