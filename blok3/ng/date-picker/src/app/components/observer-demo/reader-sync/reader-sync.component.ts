@@ -19,7 +19,7 @@ export class ReaderSyncComponent {
   }
 
   getMessages() {
-    this.messages = this.messageService.tickSync();
+    this.messages = this.messageService.messageSync();
     console.log(this.messages);
   }
 

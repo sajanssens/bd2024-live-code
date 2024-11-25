@@ -13,12 +13,11 @@ import {Subscription} from "rxjs";
   styleUrl: './reader-async.component.scss'
 })
 export class ReaderAsyncComponent {
-  protected messages: string = ''
+  protected messages = ''
   private subscription: Subscription | undefined;
 
   constructor(private messageService: MessageService) {
   }
-
 
   subscribe() {
     this.subscription = this.messageService.messages$.subscribe(message => {

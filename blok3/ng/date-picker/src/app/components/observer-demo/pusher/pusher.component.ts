@@ -12,7 +12,7 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './pusher.component.scss'
 })
 export class PusherComponent {
-  message: string = ''
+  message = ''
 
   constructor(private messageService: MessageService) {
   }
