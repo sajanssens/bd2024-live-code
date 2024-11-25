@@ -33,7 +33,7 @@ export class EditContactComponent {
   }
 
   save() {
-    let contact: Contact = {
+    const contact: Contact = {
       id: +this.id,
       firstName: this.firstName,
       surname: this.surname,

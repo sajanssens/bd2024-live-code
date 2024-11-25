@@ -24,12 +24,12 @@ export class ContactService {
     return this.#contactsAreUpdated
   }
 
-  getAll(): void {
-    this.refresh()
-  }
-
   refresh() {
     this.#contactsAreUpdated.next(this.contacts)
+  }
+
+  getAll(): void {
+    this.refresh()
   }
 
   add(newContact: Contact) {
@@ -38,7 +38,7 @@ export class ContactService {
   }
 
   save(editingContact: Contact) {
-    let find = this.contacts.find(c => c.id === editingContact.id);
+    const find = this.contacts.find(c => c.id === editingContact.id);
     if (find) {
       find.firstName = editingContact.firstName
       find.surname = editingContact.surname

@@ -22,7 +22,7 @@ import {AsyncPipe} from "@angular/common";
 })
 export class DatePickerComponent implements OnInit {
 
-  contacts!: Contact[];
+  // contacts!: Contact[];
   contacts$!: Observable<Contact[]>;
 
   constructor(private contactService: ContactService) {
