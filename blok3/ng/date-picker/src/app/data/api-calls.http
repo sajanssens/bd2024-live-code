@@ -1,0 +1,17 @@
+### GET request to example server
+GET http://localhost:3000/contacts
+
+<> 2024-11-25T120946.200.json
+
+###
+POST http://localhost:3000/contacts
+content-type: application/json
+
+{
+  "id": 16,
+  "firstName": "Ramon",
+  "surname": "Arnhem",
+  "email": "ram@n.nl"
+}
+
+<> 2024-11-25T121125.201.json

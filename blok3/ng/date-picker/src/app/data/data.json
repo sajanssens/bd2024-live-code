@@ -1,0 +1,28 @@
+{
+  "contacts": [
+    {
+      "id": 4,
+      "firstName": "Sam",
+      "surname": "Smith",
+      "email": "sam.smith@music.com"
+    },
+    {
+      "id": 8,
+      "firstName": "Frank",
+      "surname": "Muscles",
+      "email": "frank@muscles.com"
+    },
+    {
+      "id": 15,
+      "firstName": "Eddy",
+      "surname": "Valentino",
+      "email": "eddy@valfam.co.uk"
+    },
+    {
+      "id": 16,
+      "firstName": "Ramon",
+      "surname": "Arnhem",
+      "email": "ram@n.nl"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Contact} from "../model/Contact";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +11,18 @@ export class ContactService {
   contacts: Contact[];
   #contactsAreUpdated: BehaviorSubject<Contact[]>;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.contacts = [
-      {id: 4, firstName: 'Sam', surname: 'Smith', email: 'sam.smith@music.com'},
-      {id: 8, firstName: 'Frank', surname: 'Muscles', email: 'frank@muscles.com'},
-      {id: 15, firstName: 'Eddy', surname: 'Valentino', email: 'eddy@valfam.co.uk'},
+      // {id: 4, firstName: 'Sam', surname: 'Smith', email: 'sam.smith@music.com'},
+      // {id: 8, firstName: 'Frank', surname: 'Muscles', email: 'frank@muscles.com'},
+      // {id: 15, firstName: 'Eddy', surname: 'Valentino', email: 'eddy@valfam.co.uk'},
     ];
 
     this.#contactsAreUpdated = new BehaviorSubject<Contact[]>(this.contacts)
   }
 
-  get contactsAreUpdated$(): Observable<Contact[]> {
+
+  get contactsAreUpdated$(): BehaviorSubject<Contact[]> {
     return this.#contactsAreUpdated
   }
 
@@ -29,12 +31,18 @@ export class ContactService {
   }
 
   getAll(): void {
-    this.refresh()
+    const response$ = this.httpClient.get<Contact[]>('http://localhost:3000/contacts');
+    response$.subscribe(
+      contactsFromBackend => this.contactsAreUpdated$.next(contactsFromBackend)
+    )
+    // this.refresh()
   }
 
   add(newContact: Contact) {
-    this.contacts.push(newContact);
-    this.refresh()
+    this.httpClient.post<Contact>('http://localhost:3000/contacts', newContact)
+      .subscribe(() => this.getAll())
+    // this.contacts.push(newContact);
+    // this.refresh()
   }
 
   save(editingContact: Contact) {
