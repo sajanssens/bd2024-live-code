@@ -2,11 +2,14 @@ import {Injectable} from '@angular/core';
 import {Contact} from "../model/Contact";
 import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {serverUrl} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
+
+  uri = serverUrl + '/contacts';
 
   #contacts: Contact[];
   #contactsAreUpdated: BehaviorSubject<Contact[]>;
@@ -24,10 +27,8 @@ export class ContactService {
     this.#contactsAreUpdated.next(this.#contacts)
   }
 
-  private readonly _url = 'http://localhost:3000/';
-
   getAll(): void {
-    this.httpClient.get<Contact[]>(this._url + 'contacts')
+    this.httpClient.get<Contact[]>(this.uri)
       .subscribe(contactsFromBackend => {
           this.#contacts = contactsFromBackend
           this.sendRefresh()
@@ -36,7 +37,7 @@ export class ContactService {
   }
 
   add(newContact: Contact) {
-    this.httpClient.post<Contact>(this._url + 'contacts', newContact)
+    this.httpClient.post<Contact>(this.uri, newContact)
       .subscribe(addedContact => {
         this.#contacts.push(addedContact)
         this.sendRefresh()
@@ -44,7 +45,7 @@ export class ContactService {
   }
 
   save(editingContact: Contact) {
-    this.httpClient.put<Contact>(this._url + `contacts/${editingContact.id}`, editingContact)
+    this.httpClient.put<Contact>(this.uri + `/${editingContact.id}`, editingContact)
       .subscribe(editedContact => {
           this.replaceInContacts(editedContact)
           this.sendRefresh()
@@ -53,7 +54,7 @@ export class ContactService {
   }
 
   delete(contactToDelete: Contact) {
-    this.httpClient.delete<Contact>(this._url + `contacts/${contactToDelete.id}`)
+    this.httpClient.delete<Contact>(this.uri + `${contactToDelete.id}`)
       .subscribe(c => {
           this.#contacts.splice(this.#contacts.indexOf(c), 1)
           this.sendRefresh()
