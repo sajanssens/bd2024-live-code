@@ -1,0 +1,16 @@
+<form [formGroup]="candyForm">
+  <p>What candies do you like most?</p>
+
+  Your name: <input formControlName="name" />
+  <ul formArrayName="candies">
+    @for (c of candies; track c.id; let i = $index) {
+      <li [formGroupName]="i">
+        <input type="checkbox" formControlName="like" />
+        {{c.name}} <input type="hidden" formControlName="name" />
+        why: <input type="text" formControlName="why" />
+      </li>
+    }
+  </ul>
+
+  <pre>{{candyForm.value | json}}</pre>
+</form>
