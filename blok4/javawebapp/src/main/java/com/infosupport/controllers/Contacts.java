@@ -41,7 +41,12 @@ public class Contacts extends HttpServlet {
                           "email": "s.a.janssens@gmail.com"
                         }
                     ]
-                """.trim().replaceAll("\n", "").replaceAll("\r", ""));
+                """);
         // super.doGet(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("doPost");
     }
 }
