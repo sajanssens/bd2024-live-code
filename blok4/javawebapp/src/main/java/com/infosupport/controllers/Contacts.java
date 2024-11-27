@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/contacts") // or in web.xml
+// @WebServlet("/contacts") // or in web.xml
 public class Contacts extends HttpServlet {
 
     @Override

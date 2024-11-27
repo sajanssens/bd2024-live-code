@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.infosupport</groupId>
+        <artifactId>blok4</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>people</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>people</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>3.9</version>
+                <executions>
+                    <execution>
+                        <id>create-server</id>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                        <phase>
+                            package
+                        </phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <runtimeArtifact>
+                        <groupId>com.ibm.websphere.appserver.runtime</groupId>
+                        <artifactId>wlp-kernel</artifactId>
+                        <version>24.0.0.11</version>
+                        <type>zip</type>
+                    </runtimeArtifact>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
