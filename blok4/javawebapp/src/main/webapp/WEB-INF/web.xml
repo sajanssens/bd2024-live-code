@@ -4,12 +4,12 @@
 
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
-    <servlet>
-        <servlet-name>contactsServlet</servlet-name>
-        <servlet-class>com.infosupport.controllers.Contacts</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>contactsServlet</servlet-name>
-        <url-pattern>/contacts</url-pattern>
-    </servlet-mapping>
+    <!--    <servlet>-->
+    <!--        <servlet-name>contactsServlet</servlet-name>-->
+    <!--        <servlet-class>com.infosupport.controllers.Contacts</servlet-class>-->
+    <!--    </servlet>-->
+    <!--    <servlet-mapping>-->
+    <!--        <servlet-name>contactsServlet</servlet-name>-->
+    <!--        <url-pattern>/contacts</url-pattern>-->
+    <!--    </servlet-mapping>-->
 </web-app>

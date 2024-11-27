@@ -1,12 +1,19 @@
 ## Labs Jakarta EE
 
 1. **Jakarta EE Container**
-	- download OpenLiberty, bekijk de install dir	
-		kies voor de kale kernel versie en bekijk de README.
-		doe dan `server create`
-	- maak een HelloWorld in maven en deploy en run op WLP
-		- bewerk de `server.xml` van defaultServer
+	- download OpenLiberty en bekijk de install dir	
+		- kies voor de kale kernel versie en bekijk de README.
+		- doe dan `server create`
+	- maak een HelloWorld webapp in maven en deploy en run op OpenLiberty
+		- bewerk de `server.xml` van defaultServer om de juiste features toe te voegen
+          - in dit geval hebben we in elk geval de volgende spec nodig: Jakarta Servlet
+          - kijk hier voor de bijbehorende feature(s): https://openliberty.io/docs/latest/reference/feature/feature-overview.html
+          - afhankelijk van wat je app nog meer doet, heb je extra specs en features nodig 
 		- voer uit `featureUtility installServerFeatures defaultServer`
+          - Opmerking: mogelijk moet je nog een artifact repository instellen als je niet bij maven central mag:
+            - Maak bestand: `wlp\etc\featureUtility.properties`
+            - Zet deze regel in dat bestand: \
+              `mavenCentralMirror.url=https://nexus.belastingdienst.nl/nexus/repository/repo`
 		- zet je war in de `dropins` folder
 		- voer uit `server run`
 	- gebruik nu de `liberty-maven-plugin` met `mvn liberty:dev`

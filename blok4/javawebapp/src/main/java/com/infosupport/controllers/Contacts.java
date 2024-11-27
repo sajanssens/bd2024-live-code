@@ -1,6 +1,7 @@
 package com.infosupport.controllers;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-// @WebServlet("contacts") // or in web.xml
+@WebServlet("/contacts") // or in web.xml
 public class Contacts extends HttpServlet {
 
     @Override
