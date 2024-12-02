@@ -30,23 +30,22 @@
        - maak je eerste resource op een uniek `@Path` met een `@GET` endpoint die `Hello World` teruggeeft.
     2. Breid je GET endpoint uit met een query parameter id: als deze negatief is, geef dan een http 400 terug.
     3. Maak je tweede resource met een GET endpoint die een List van objecten teruggeeft als JSON.
-    4. Breid die resource uit met: GET met queryparam, GET met pathparam, POST, PUT en DELETE.
+    4. OpenApi/Swagger toevoegen.
+    5. Breid die resource uit met: GET met queryparam, GET met pathparam, POST, PUT en DELETE.
        - test met bijv. de Http client in IDEA of met Postman.
-    5. Maak een Dao/Repo voor je objecten.
-    6. Maak gebruik van sub resources: acties op één entity moeten in een aparte resource.
-    7. Bouw ondersteuning in voor XML-responses.
-    8. Zorg ervoor dat je JSON-array in je response een naam krijgt (zodat een client hierop kan selecteren): 
-       - van unnamed `[ {..}, .. ]` naar named `{ "arraynaam": [ {..}, .. ] }`
-    9. Bouw een CORS filter.
-    10. Maak een filter die checkt of je ingelogd bent. Zo niet, dan geef je een `401` terug. 
-        Dit kun je nabootsen door in de request een header op te nemen: `Authorization: true`.
-        Dit filter moet NIET worden uitgevoerd als er `@NotSecured` boven een methode staat.
-    11. Bouw JPA in.
+    6. Maak een Dao/Repo voor je objecten.
+    7. Maak gebruik van sub resources: acties op één entity moeten in een aparte resource.
+    8. Bouw een CORS filter.
+    9. Maak een filter die checkt of je ingelogd bent. Zo niet, dan geef je een `401` terug. 
+       Dit kun je nabootsen door in de request een header op te nemen: `Authorization: true`.
+       Dit filter moet NIET worden uitgevoerd als er `@NotSecured` boven een methode staat.    7. Bouw ondersteuning in voor XML-responses.
+    10. Bouw JPA in.
+    11. Zorg ervoor dat je JSON-array in je response een naam krijgt (zodat een client hierop kan selecteren): 
+        - van unnamed `[ {..}, .. ]` naar named `{ "arraynaam": [ {..}, .. ] }`
     12. Handling errors implementeren m.b.v. exceptions en foutmeldingen.
-    13. OpenApi/Swagger toevoegen.
-    14. Connectedness implementeren.
-    15. JWT implementeren.
-    16. Integratietest maken met behulp van `test-containers`.
+    13. Connectedness implementeren.
+    14. JWT implementeren.
+    15. Integratietest maken met behulp van `test-containers`.
 
 3. CDI (TODO)
 4. EJB (TODO)
