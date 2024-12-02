@@ -1,6 +1,6 @@
 package com.infosupport.repositories;
-
 import com.infosupport.domain.Contact;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -25,7 +25,7 @@ public class ContactJPARepo implements Repo<Contact> {
 
     @Transactional
     @Override public Contact add(Contact contact) {
-        return null;
+        return em.merge(contact);
     }
 
     @Override public void remove(int id) {
