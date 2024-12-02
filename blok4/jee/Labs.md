@@ -34,12 +34,12 @@
     5. Breid die resource uit met: GET met queryparam, GET met pathparam, POST, PUT en DELETE.
        - test met bijv. de Http client in IDEA of met Postman.
     6. Maak een Dao/Repo voor je objecten.
-    7. Maak gebruik van sub resources: acties op één entity moeten in een aparte resource.
-    8. Bouw een CORS filter.
-    9. Maak een filter die checkt of je ingelogd bent. Zo niet, dan geef je een `401` terug. 
-       Dit kun je nabootsen door in de request een header op te nemen: `Authorization: true`.
-       Dit filter moet NIET worden uitgevoerd als er `@NotSecured` boven een methode staat.    7. Bouw ondersteuning in voor XML-responses.
-    10. Bouw JPA in.
+    7. Bouw JPA in.
+    8. Maak gebruik van sub resources: acties op één entity moeten in een aparte resource.
+    9. Bouw een CORS filter.
+    10. Maak een filter die checkt of je ingelogd bent. Zo niet, dan geef je een `401` terug. 
+        Dit kun je nabootsen door in de request een header op te nemen: `Authorization: true`.
+        Dit filter moet NIET worden uitgevoerd als er `@NotSecured` boven een methode staat.    7. Bouw ondersteuning in voor XML-responses.
     11. Zorg ervoor dat je JSON-array in je response een naam krijgt (zodat een client hierop kan selecteren): 
         - van unnamed `[ {..}, .. ]` naar named `{ "arraynaam": [ {..}, .. ] }`
     12. Handling errors implementeren m.b.v. exceptions en foutmeldingen.

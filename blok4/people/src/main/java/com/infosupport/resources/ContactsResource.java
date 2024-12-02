@@ -3,6 +3,7 @@ package com.infosupport.resources;
 import com.infosupport.domain.Contact;
 import com.infosupport.domain.ContactDto;
 import com.infosupport.repositories.ContactInMemoryRepo;
+import com.infosupport.repositories.ContactJPARepo;
 import com.infosupport.repositories.Repo;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -27,7 +28,7 @@ public class ContactsResource {
 
     @Context UriInfo uri;
 
-    @Inject ContactInMemoryRepo repo;
+    @Inject ContactJPARepo repo;
 
     @GET
     public List<Contact> allByQ(@QueryParam("q") String q) {
@@ -39,8 +40,8 @@ public class ContactsResource {
     }
 
     @POST
-    public Response add(ContactDto contactDto) {
-        Contact add = repo.add(contactDto);
+    public Response add(Contact contact) {
+        Contact add = repo.add(contact);
 
         return Response
                 .created(uri.getAbsolutePath())
