@@ -10,6 +10,7 @@
         <properties>
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="jakarta.persistence.validation.mode" value="AUTO"/>
+            <property name="jakarta.persistence.sql-load-script-source" value="data.sql"/>
         </properties>
     </persistence-unit>
 

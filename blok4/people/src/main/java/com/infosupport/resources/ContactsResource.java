@@ -1,10 +1,8 @@
 package com.infosupport.resources;
 
 import com.infosupport.domain.Contact;
-import com.infosupport.domain.ContactDto;
-import com.infosupport.repositories.ContactInMemoryRepo;
+import com.infosupport.repositories.ContactDataRepo;
 import com.infosupport.repositories.ContactJPARepo;
-import com.infosupport.repositories.Repo;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -20,7 +18,6 @@ import jakarta.ws.rs.core.UriInfo;
 import java.util.List;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
-import static java.util.Comparator.comparingInt;
 
 @Path("contacts")
 @Produces(APPLICATION_JSON) @Consumes(APPLICATION_JSON)
@@ -29,13 +26,14 @@ public class ContactsResource {
     @Context UriInfo uri;
 
     @Inject ContactJPARepo repo;
+    @Inject ContactDataRepo dataRepo;
 
     @GET
-    public List<Contact> allByQ(@QueryParam("q") String q) {
-        if (q == null || q.isBlank()) {
-            return repo.findAll();
+    public List<Contact> allByQ(@QueryParam("firstName") String firstName) {
+        if (firstName == null || firstName.isBlank()) {
+            return dataRepo.findAll().toList();
         } else {
-            return repo.search(q);
+            return dataRepo.findByFirstName(firstName);
         }
     }
 

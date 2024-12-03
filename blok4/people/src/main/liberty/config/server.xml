@@ -2,12 +2,13 @@
 <server description="new server">
 
     <featureManager>
-        <feature>restfulWS-3.1</feature>
+        <feature>restfulWS-4.0</feature>
         <feature>jsonb-3.0</feature>
-        <feature>cdi-4.0</feature>
+        <feature>cdi-4.1</feature>
         <feature>mpOpenAPI-3.1</feature>
-        <feature>persistence-3.1</feature>
-        <feature>enterpriseBeans-4.0</feature>
+        <feature>persistence-3.2</feature>
+        <feature>data-1.0</feature>
+        <feature>enterpriseBeansLite-4.0</feature>
         <feature>monitor-1.0</feature> <!-- Needed for live reload -->
     </featureManager>
 
