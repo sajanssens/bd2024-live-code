@@ -37,28 +37,24 @@
     7. Bouw JPA in.
     8. Maak gebruik van sub resources: acties op één entity moeten in een aparte resource.
     9. Bouw een CORS filter.
-    10. Maak een filter die checkt of je ingelogd bent. Zo niet, dan geef je een `401` terug. 
-        Dit kun je nabootsen door in de request een header op te nemen: `Authorization: true`.
-        Dit filter moet NIET worden uitgevoerd als er `@NotSecured` boven een methode staat.    7. Bouw ondersteuning in voor XML-responses.
-    11. JWT implementeren.
-    12. Zorg ervoor dat je JSON-array in je response een naam krijgt (zodat een client hierop kan selecteren): 
+    10. Zorg ervoor dat je JSON-array in je response een naam krijgt (zodat een client hierop kan selecteren): 
         - van unnamed `[ {..}, .. ]` naar named `{ "arraynaam": [ {..}, .. ] }`
-    13. Handling errors implementeren m.b.v. exceptions en foutmeldingen.
-    14. Connectedness implementeren.
-    15. Integratietest maken met behulp van `test-containers`.
+    11. Handling errors implementeren m.b.v. exceptions en foutmeldingen.
+    12. Connectedness implementeren.
+    13. Integratietest maken met behulp van `test-containers`.
+
 
 3. REST security
-```
-										Zie bd2024-live-code-maart:
 
- 1   login pagina in angular maken		blok3/ng/baseball-quiz/../login-component/*
- 2+3 login endpoint in backend			blok4/baseball-quiz/...../resources/UsersResource
- 4   jwt toevoegen						
-	 - backend					 		blok4/baseball-quiz/...../resources/UsersResource
-	 - frontend							blok3/ng/baseball-quiz/../services/user.service.ts
- 5  jwt meesturen vanuit front end		blok3/ng/baseball-quiz/../guards/jwt.interceptor.ts
- 6  AuthFilter toevoegen				blok4/baseball-quiz/...../util/AuthFilter
-```
+| # | Task                          | Zie bd2024-live-code-maart                          |
+|---|-------------------------------|-----------------------------------------------------|
+| 1 | Login pagina in Angular maken | blok3/ng/baseball-quiz/../login-component/*         |
+| 2 | Login endpoint in backend     | blok4/baseball-quiz/...../resources/UsersResource   |
+| 3 | JWT toevoegen - backend       | blok4/baseball-quiz/...../resources/UsersResource   |
+| 4 | JWT toevoegen - frontend      | blok3/ng/baseball-quiz/../services/user.service.ts  |
+| 5 | JWT meesturen vanuit frontend | blok3/ng/baseball-quiz/../guards/jwt.interceptor.ts |
+| 6 | AuthFilter toevoegen          | blok4/baseball-quiz/...../util/AuthFilter           |
+
 3. CDI (TODO)
 4. EJB (TODO)
 5. JMS (TODO)
