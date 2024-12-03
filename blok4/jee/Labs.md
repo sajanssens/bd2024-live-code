@@ -40,11 +40,11 @@
     10. Maak een filter die checkt of je ingelogd bent. Zo niet, dan geef je een `401` terug. 
         Dit kun je nabootsen door in de request een header op te nemen: `Authorization: true`.
         Dit filter moet NIET worden uitgevoerd als er `@NotSecured` boven een methode staat.    7. Bouw ondersteuning in voor XML-responses.
-    11. Zorg ervoor dat je JSON-array in je response een naam krijgt (zodat een client hierop kan selecteren): 
+    11. JWT implementeren.
+    12. Zorg ervoor dat je JSON-array in je response een naam krijgt (zodat een client hierop kan selecteren): 
         - van unnamed `[ {..}, .. ]` naar named `{ "arraynaam": [ {..}, .. ] }`
-    12. Handling errors implementeren m.b.v. exceptions en foutmeldingen.
-    13. Connectedness implementeren.
-    14. JWT implementeren.
+    13. Handling errors implementeren m.b.v. exceptions en foutmeldingen.
+    14. Connectedness implementeren.
     15. Integratietest maken met behulp van `test-containers`.
 
 3. CDI (TODO)
