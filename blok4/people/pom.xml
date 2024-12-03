@@ -31,6 +31,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>jakarta.data</groupId>
+            <artifactId>jakarta.data-api</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
             <scope>provided</scope>
@@ -95,16 +101,16 @@
                         <goals>
                             <goal>create</goal>
                         </goals>
-                        <phase>
-                            package
-                        </phase>
+                        <phase>package</phase>
                     </execution>
                 </executions>
                 <configuration>
                     <runtimeArtifact>
-                        <groupId>com.ibm.websphere.appserver.runtime</groupId>
-                        <artifactId>wlp-kernel</artifactId>
-                        <version>24.0.0.11</version>
+                        <!--<groupId>io.openliberty.beta</groupId>
+                        <artifactId>openliberty-runtime</artifactId>-->
+                        <groupId>io.openliberty.beta</groupId>
+                        <artifactId>openliberty-runtime</artifactId>
+                        <version>24.0.0.12-beta</version>
                         <type>zip</type>
                     </runtimeArtifact>
                     <copyDependencies>

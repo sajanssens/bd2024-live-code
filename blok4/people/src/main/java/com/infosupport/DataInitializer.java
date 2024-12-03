@@ -2,13 +2,12 @@ package com.infosupport;
 
 import com.infosupport.domain.Contact;
 import com.infosupport.repositories.ContactJPARepo;
+import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import jakarta.inject.Inject;
-import jakarta.annotation.PostConstruct;
 
-
-@Startup
+@Startup // to eagerly instantiate this bean
 @Singleton
 public class DataInitializer {
 
@@ -16,7 +15,7 @@ public class DataInitializer {
     private ContactJPARepo repo;
 
     @PostConstruct
-    public void init() {
+    public void onInit() {
         System.out.println("Initializing database...");
         repo.add(Contact.builder().firstName("Bram").surname("Janssens").build());
         repo.add(Contact.builder().firstName("Bram2").surname("Janssens2").build());
