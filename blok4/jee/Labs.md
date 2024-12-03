@@ -47,6 +47,18 @@
     14. Connectedness implementeren.
     15. Integratietest maken met behulp van `test-containers`.
 
+3. REST security
+```
+										Zie bd2024-live-code-maart:
+
+ 1   login pagina in angular maken		blok3/ng/baseball-quiz/../login-component/*
+ 2+3 login endpoint in backend			blok4/baseball-quiz/...../resources/UsersResource
+ 4   jwt toevoegen						
+	 - backend					 		blok4/baseball-quiz/...../resources/UsersResource
+	 - frontend							blok3/ng/baseball-quiz/../services/user.service.ts
+ 5  jwt meesturen vanuit front end		blok3/ng/baseball-quiz/../guards/jwt.interceptor.ts
+ 6  AuthFilter toevoegen				blok4/baseball-quiz/...../util/AuthFilter
+```
 3. CDI (TODO)
 4. EJB (TODO)
 5. JMS (TODO)
