@@ -72,6 +72,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>jakarta.jms</groupId>
+            <artifactId>jakarta.jms-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.32</version>
@@ -106,11 +111,9 @@
                 </executions>
                 <configuration>
                     <runtimeArtifact>
-                        <!--<groupId>io.openliberty.beta</groupId>
-                        <artifactId>openliberty-runtime</artifactId>-->
-                        <groupId>io.openliberty.beta</groupId>
-                        <artifactId>openliberty-runtime</artifactId>
-                        <version>24.0.0.12-beta</version>
+                        <groupId>io.openliberty</groupId>
+                        <artifactId>openliberty-kernel</artifactId>
+                        <version>24.0.0.12</version>
                         <type>zip</type>
                     </runtimeArtifact>
                     <copyDependencies>

@@ -26,14 +26,13 @@ public class ContactsResource {
     @Context UriInfo uri;
 
     @Inject ContactJPARepo repo;
-    @Inject ContactDataRepo dataRepo;
 
     @GET
     public List<Contact> allByQ(@QueryParam("firstName") String firstName) {
         if (firstName == null || firstName.isBlank()) {
-            return dataRepo.findAll().toList();
+            return repo.findAll();
         } else {
-            return dataRepo.findByFirstName(firstName);
+            return repo.search(firstName);
         }
     }
 

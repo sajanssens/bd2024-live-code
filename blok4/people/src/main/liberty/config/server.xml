@@ -2,13 +2,16 @@
 <server description="new server">
 
     <featureManager>
-        <feature>restfulWS-4.0</feature>
+        <feature>restfulWS-3.1</feature>
         <feature>jsonb-3.0</feature>
-        <feature>cdi-4.1</feature>
+        <feature>cdi-4.0</feature>
         <feature>mpOpenAPI-3.1</feature>
-        <feature>persistence-3.2</feature>
-        <feature>data-1.0</feature>
-        <feature>enterpriseBeansLite-4.0</feature>
+        <feature>persistence-3.1</feature>
+        <!-- <feature>data-1.0</feature>-->
+        <feature>enterpriseBeans-4.0</feature>
+        <feature>messaging-3.1</feature>
+        <feature>messagingServer-3.0</feature>
+        <feature>messagingClient-3.0</feature>
         <feature>monitor-1.0</feature> <!-- Needed for live reload -->
     </featureManager>
 
@@ -27,6 +30,28 @@
                     password="root"
                     serverTimezone="UTC"/>
     </dataSource>
+
+    <!--    For jms: -->
+
+    <!--    This is the message broker, built-in in OpenLiberty (being WAS JMS),  with one queue. -->
+    <messagingEngine>
+        <queue id="salaris"/>
+    </messagingEngine>
+
+    <!--    A factory to be used in my code via @Resource, to get my JMS context -->
+    <jmsQueueConnectionFactory jndiName="jms/connectionFactory">
+        <properties.wasJms remoteServerAddress="localhost:7276:BootstrapBasicMessaging"/>
+    </jmsQueueConnectionFactory>
+
+    <!--    The JmsQueue to be used in my code via @Resource, coupled to the queue on wasJms -->
+    <jmsQueue id="salarisJmsQueue" jndiName="jms/salarisQueue">
+        <properties.wasJms queueName="salaris"/>
+    </jmsQueue>
+
+    <!--    My MessageDrivenBean, being SalarisOvermakenConsumer, that's annotated with @MessageDriven(name = "aangifteMdb") -->
+    <jmsActivationSpec id="people/salarisMdb"> <!--syntax: <war-name>/<mdb-name> (ENC syntax)-->
+        <properties.wasJms destinationRef="salarisJmsQueue" destinationType="jakarta.jms.Queue"/>
+    </jmsActivationSpec>
 
     <httpEndpoint id="defaultHttpEndpoint" httpPort="9080" httpsPort="9443"/>
 
