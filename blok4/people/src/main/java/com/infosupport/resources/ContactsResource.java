@@ -3,6 +3,7 @@ package com.infosupport.resources;
 import com.infosupport.domain.Contact;
 import com.infosupport.repositories.ContactDataRepo;
 import com.infosupport.repositories.ContactJPARepo;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -19,13 +20,15 @@ import java.util.List;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
-@Path("contacts")
+@Path("contacts") // implicitly @RequestScoped
 @Produces(APPLICATION_JSON) @Consumes(APPLICATION_JSON)
 public class ContactsResource {
 
     @Context UriInfo uri;
 
     @Inject ContactJPARepo repo;
+
+    @Inject ContactResource contactResource;
 
     @GET
     public List<Contact> allByQ(@QueryParam("firstName") String firstName) {
@@ -45,10 +48,11 @@ public class ContactsResource {
                 .entity(add).build();
     }
 
-    @GET @Path("{id}")
-    public Response one(@PathParam("id") int id) {
-        return Response.ok()
-                .entity(new Contact(id, "Bram", "Janssens", "45@42.com"))
-                .build();
+    @Path("{id}")
+    public ContactResource toContactResource(@PathParam("id") int id){
+        this.contactResource.setId(id);
+        return this.contactResource;
     }
+
+
 }
