@@ -1,9 +1,8 @@
 package com.infosupport.resources;
 
 import com.infosupport.domain.Contact;
-import com.infosupport.repositories.ContactDataRepo;
+import com.infosupport.exceptions.VoornaamTeLangException;
 import com.infosupport.repositories.ContactJPARepo;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -13,7 +12,6 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
 import java.util.List;
@@ -32,6 +30,10 @@ public class ContactsResource {
 
     @GET
     public List<Contact> allByQ(@QueryParam("firstName") String firstName) {
+        if (firstName.length() > 10) {
+            throw new VoornaamTeLangException("mag niet langer zijn dan 10 tekens");
+        }
+
         if (firstName == null || firstName.isBlank()) {
             return repo.findAll();
         } else {
@@ -40,19 +42,17 @@ public class ContactsResource {
     }
 
     @POST
-    public Response add(Contact contact) {
-        Contact add = repo.add(contact);
+    public Contact add(Contact contact) {
+        return repo.add(contact);
 
-        return Response
-                .created(uri.getAbsolutePath())
-                .entity(add).build();
+        // return Response
+        //         .created(uri.getAbsolutePath())
+        //         .entity(add).build();
     }
 
     @Path("{id}")
-    public ContactResource toContactResource(@PathParam("id") int id){
+    public ContactResource toContactResource(@PathParam("id") int id) {
         this.contactResource.setId(id);
         return this.contactResource;
     }
-
-
 }

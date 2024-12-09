@@ -18,7 +18,7 @@ public class SalarisOvermakenProducer {
     @Resource(name = "jms/connectionFactory")
     private ConnectionFactory connectionFactory;
 
-    @Schedule(hour = "*", minute = "*", second = "*/1")
+    // @Schedule(hour = "*", minute = "*", second = "*/1")
     public void send() {
         SalarisDto dto = new SalarisDto(140, "schaal 14", 424242);
         System.out.println("About to send message: " + dto);
