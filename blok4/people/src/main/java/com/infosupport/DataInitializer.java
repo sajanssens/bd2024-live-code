@@ -1,7 +1,7 @@
 package com.infosupport;
 
 import com.infosupport.domain.Contact;
-import com.infosupport.repositories.ContactJPARepo;
+import com.infosupport.repositories.ContactRepo;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
@@ -12,7 +12,7 @@ import jakarta.inject.Inject;
 public class DataInitializer {
 
     @Inject
-    private ContactJPARepo repo;
+    private ContactRepo repo;
 
     @PostConstruct
     public void onInit() {

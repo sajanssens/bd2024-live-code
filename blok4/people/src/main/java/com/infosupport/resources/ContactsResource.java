@@ -2,7 +2,8 @@ package com.infosupport.resources;
 
 import com.infosupport.domain.Contact;
 import com.infosupport.exceptions.VoornaamTeLangException;
-import com.infosupport.repositories.ContactJPARepo;
+import com.infosupport.repositories.Repo;
+import com.infosupport.util.MeasureMethodDuration;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -24,13 +25,15 @@ public class ContactsResource {
 
     @Context UriInfo uri;
 
-    @Inject ContactJPARepo repo;
+    @Inject // @CR
+    Repo<Contact> repo;
 
     @Inject ContactResource contactResource;
 
     @GET
+    @MeasureMethodDuration
     public List<Contact> allByQ(@QueryParam("firstName") String firstName) {
-        if (firstName.length() > 10) {
+        if (firstName != null && firstName.length() > 10) {
             throw new VoornaamTeLangException("mag niet langer zijn dan 10 tekens");
         }
 

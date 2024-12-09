@@ -1,6 +1,6 @@
 package com.infosupport.repositories;
-import com.infosupport.domain.Contact;
 
+import com.infosupport.domain.Contact;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -9,7 +9,8 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped // == singleton
-public class ContactJPARepo implements Repo<Contact> {
+// @Any @Default impliciet aanwezig
+public class ContactRepo implements Repo<Contact> {
 
     @PersistenceContext(name = "MySQL")
     private EntityManager em;

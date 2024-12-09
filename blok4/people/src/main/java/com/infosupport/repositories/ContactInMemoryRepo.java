@@ -2,7 +2,10 @@ package com.infosupport.repositories;
 
 import com.infosupport.domain.Contact;
 import com.infosupport.domain.ContactDto;
+import com.infosupport.resources.CR;
 import jakarta.enterprise.context.ApplicationScoped; // CDI = Contexts & Dependency Injection
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Default;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.List;
 import static java.util.Comparator.comparingInt;
 
 @ApplicationScoped // == singleton
+@CR
 public class ContactInMemoryRepo implements Repo<Contact> {
 
     private static final ArrayList<Contact> contacts = new ArrayList<>(List.of(

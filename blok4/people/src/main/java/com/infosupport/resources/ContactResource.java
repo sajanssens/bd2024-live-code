@@ -2,14 +2,19 @@ package com.infosupport.resources;
 
 import com.infosupport.domain.Contact;
 import jakarta.enterprise.context.Dependent;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
 
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
+
 @Dependent // gets same scope as the bean from where it is injected
+@Produces(APPLICATION_JSON) @Consumes(APPLICATION_JSON)
 public class ContactResource {
 
     private int id;
