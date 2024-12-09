@@ -1,7 +1,6 @@
 package com.infosupport.jms;
 
 import jakarta.annotation.Resource;
-import jakarta.ejb.Schedule;
 import jakarta.ejb.Stateless;
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSProducer;
