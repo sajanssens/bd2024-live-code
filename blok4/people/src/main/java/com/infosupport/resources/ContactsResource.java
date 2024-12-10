@@ -25,10 +25,11 @@ public class ContactsResource {
 
     @Context UriInfo uri;
 
-    @Inject // @CR
-    Repo<Contact> repo;
+    @Inject @CR
+    private Repo<Contact> repo;
 
-    @Inject ContactResource contactResource;
+    @Inject
+    private ContactResource contactResource;
 
     @GET
     @MeasureMethodDuration
@@ -53,6 +54,7 @@ public class ContactsResource {
         //         .entity(add).build();
     }
 
+    // HIER GEEN WERKWOORD ZOALS @GET GEBRUIKEN!!!
     @Path("{id}")
     public ContactResource toContactResource(@PathParam("id") int id) {
         this.contactResource.setId(id);

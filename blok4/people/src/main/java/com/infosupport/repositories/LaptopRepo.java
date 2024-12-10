@@ -1,5 +1,6 @@
 package com.infosupport.repositories;
 
+import com.infosupport.domain.Laptop;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;

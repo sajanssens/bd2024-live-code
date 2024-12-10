@@ -1,5 +1,6 @@
 package com.infosupport.util;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
@@ -11,6 +12,7 @@ import static java.time.temporal.ChronoUnit.NANOS;
 // Must also be declared in beans.xml!
 @MeasureMethodDuration
 @Interceptor // AOP = Aspect Oriented Programming
+@Priority(Interceptor.Priority.APPLICATION)
 public class MethodDurationInterceptor {
 
     @AroundInvoke

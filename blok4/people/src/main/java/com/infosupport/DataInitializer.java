@@ -2,6 +2,7 @@ package com.infosupport;
 
 import com.infosupport.domain.Contact;
 import com.infosupport.repositories.ContactRepo;
+import com.infosupport.resources.CR;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
@@ -11,7 +12,7 @@ import jakarta.inject.Inject;
 @Singleton
 public class DataInitializer {
 
-    @Inject
+    @Inject @CR
     private ContactRepo repo;
 
     @PostConstruct

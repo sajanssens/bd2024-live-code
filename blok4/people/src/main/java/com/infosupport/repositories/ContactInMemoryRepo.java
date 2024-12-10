@@ -13,7 +13,6 @@ import java.util.List;
 import static java.util.Comparator.comparingInt;
 
 @ApplicationScoped // == singleton
-@CR
 public class ContactInMemoryRepo implements Repo<Contact> {
 
     private static final ArrayList<Contact> contacts = new ArrayList<>(List.of(
