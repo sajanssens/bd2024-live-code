@@ -5,7 +5,7 @@ import jakarta.ws.rs.core.Application;
 
 // http(s)://serveraddress:serverport/context-root/application-path/...
 
-@ApplicationPath("rest-api")
+@ApplicationPath("api")
 public class App extends Application {
     // dit is onze "main"
 }

@@ -1,7 +1,6 @@
 package com.infosupport.repositories;
 
 import com.infosupport.domain.Contact;
-import com.infosupport.resources.CR;
 import com.infosupport.util.ContactJsonServerClient;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -9,7 +8,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import java.util.List;
 
 @ApplicationScoped // == singleton
-@CR
+// @CR
 public class ContactWebRepo implements Repo<Contact> {
 
     @RestClient ContactJsonServerClient http;

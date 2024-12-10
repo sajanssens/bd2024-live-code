@@ -11,6 +11,7 @@ import java.util.List;
 
 @ApplicationScoped // == singleton
 // @Any @Default impliciet aanwezig
+@CR
 public class ContactRepo implements Repo<Contact> {
 
     @PersistenceContext(name = "MySQL")

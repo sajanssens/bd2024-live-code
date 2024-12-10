@@ -5,5 +5,5 @@
 export const environment = {production: false};
 
 // export const serverUrl = 'http://localhost:3000';
-// export const serverUrl = 'http://localhost:9080/hrm/api';
+// export const serverUrl = 'http://localhost:9080/people/api';
 export const serverUrl = 'http://localhost:8080/javawebapp';

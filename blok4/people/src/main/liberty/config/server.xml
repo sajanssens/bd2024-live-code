@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <server description="new server">
 
+    <variable name="MYSQL_HOSTNAME" defaultValue="localhost"/>
+    <variable name="MYSQL_DATABASE" defaultValue="people"/>
+    <variable name="MYSQL_PORT" defaultValue="3306"/>
+    <variable name="MYSQL_USE_SSL" defaultValue="true"/>
+
     <featureManager>
         <feature>restfulWS-3.1</feature>
         <feature>jsonb-3.0</feature>
@@ -12,7 +17,8 @@
         <feature>messaging-3.1</feature>
         <feature>messagingServer-3.0</feature>
         <feature>messagingClient-3.0</feature>
-        <feature>monitor-1.0</feature> <!-- Needed for live reload -->
+        <feature>monitor-1.0</feature> <!-- Needed for live reload? -->
+        <feature>mpHealth-4.0</feature> <!-- Needed for test containers -->
     </featureManager>
 
     <library id="MySQLLib">
@@ -22,10 +28,10 @@
     <dataSource id="DefaultDataSource"
                 jndiName="jdbc/peopleMySqlDatasource">
         <jdbcDriver libraryRef="MySQLLib"/>
-        <properties serverName="localhost"
-                    portNumber="3306"
-                    useSSL="true"
-                    databaseName="people"
+        <properties serverName="${MYSQL_HOSTNAME}"
+                    portNumber="${MYSQL_PORT}"
+                    useSSL="${MYSQL_USE_SSL}"
+                    databaseName="${MYSQL_DATABASE}"
                     user="root"
                     password="root"
                     serverTimezone="UTC"/>
