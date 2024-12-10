@@ -2,32 +2,36 @@ package com.infosupport.repositories;
 
 import com.infosupport.domain.Contact;
 import com.infosupport.resources.CR;
+import com.infosupport.util.ContactJsonServerClient;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.List;
 
 @ApplicationScoped // == singleton
-// @Any @Default impliciet aanwezig
-public class ContactRepo implements Repo<Contact> {
+@CR
+public class ContactWebRepo implements Repo<Contact> {
 
-    @PersistenceContext(name = "MySQL")
-    private EntityManager em;
+    @RestClient ContactJsonServerClient http;
 
     @Override
     public List<Contact> findAll() {
-        return em.createQuery("Select c from Contact c", Contact.class).getResultList();
+        // Client http = ClientBuilder.newClient();
+        // List<Contact> list =
+        //         http.target("http://localhost:3000/contacts")
+        //                 .request()
+        //                 .header("Authorization", "Bearer fhsdfg84ru8ybhjvsifbjsfnisihvubj")
+        //                 .get(List.class);
+        List<Contact> list = http.getContacts();
+        return list;
     }
 
     @Override public List<Contact> search(String term) {
         return List.of();
     }
 
-    @Transactional
     @Override public Contact add(Contact contact) {
-        return em.merge(contact);
+        return null;
     }
 
     @Override public void remove(int id) {
