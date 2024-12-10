@@ -17,7 +17,7 @@ class AppIT {
     private static final Gson gson = new GsonBuilder().create();
 
     @Test
-    void whenPostAndGetAangiftesIsCalledItWorks() {
+    void whenPostAndGetAreCalledItWorks() {
         var a = Contact.builder().firstName("firstName").surname("surname").build();
 
         var contact = given().contentType("application/json")
