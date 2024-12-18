@@ -1,0 +1,53 @@
+name: umpire-quiz
+services:
+
+  people-service:
+    image: bramjanssens/umpire-quiz-question-service:${BACKEND_VERSION}
+    pull_policy: always
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost:9080/health/ready" ]
+      interval: 2s
+      timeout: 10s
+      retries: 24
+      start_period: 5s
+    ports:
+      - "${BACKEND_PORT}:9080"
+    environment:
+      MYSQL_HOSTNAME: "backend-db"
+      MYSQL_PORT: "3306"
+      MYSQL_ROOT_PASSWORD: "${BACKEND_DB_PASSWORD}"
+      MYSQL_DATABASE: "${BACKEND_DB_NAME}"
+      FRONTEND_URL: "${FRONTEND_URL}"
+      JWT_SHAREDKEY: "${JWT_SHAREDKEY}"
+    depends_on:
+      backend-db:
+        condition: service_healthy
+    networks:
+      - umpire-network
+
+  backend-db:
+    image: docker.io/mysql:${DB_VERSION}
+    pull_policy: missing
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 2s
+      timeout: 10s
+      start_period: 2s
+      retries: 10
+    volumes:
+      - backend-db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: "${BACKEND_DB_NAME}"
+    ports:
+      - "3306:3306"
+    networks:
+      - umpire-network
+
+volumes:
+  mysql-data:
+
+networks:
+  umpire-network:
+    driver: bridge
+#  user-service-db-data:
