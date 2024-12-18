@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <server description="new server">
 
-    <variable name="MYSQL_HOSTNAME" defaultValue="localhost"/>
-    <variable name="MYSQL_DATABASE" defaultValue="people"/>
+    <variable name="MYSQL_HOSTNAME" defaultValue="mysql"/>
     <variable name="MYSQL_PORT" defaultValue="3306"/>
+    <variable name="MYSQL_DATABASE" defaultValue="people-db"/>
+    <variable name="MYSQL_ROOT_PASSWORD" defaultValue="root"/>
     <variable name="MYSQL_USE_SSL" defaultValue="true"/>
 
     <featureManager>
@@ -28,12 +29,11 @@
     <dataSource id="DefaultDataSource"
                 jndiName="jdbc/peopleMySqlDatasource">
         <jdbcDriver libraryRef="MySQLLib"/>
-        <properties serverName="${MYSQL_HOSTNAME}"
-                    portNumber="${MYSQL_PORT}"
-                    useSSL="${MYSQL_USE_SSL}"
-                    databaseName="${MYSQL_DATABASE}"
-                    user="root"
-                    password="root"
+        <properties serverName="mysql"
+                    portNumber="3306"
+                    useSSL="false" allowPublicKeyRetrieval="true"
+                    databaseName="people-db"
+                    user="root" password="root"
                     serverTimezone="UTC"/>
     </dataSource>
 

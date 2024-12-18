@@ -1,53 +1,49 @@
-name: umpire-quiz
+name: hrm
+
 services:
 
   people-service:
-    image: bramjanssens/umpire-quiz-question-service:${BACKEND_VERSION}
-    pull_policy: always
+    build: .
     healthcheck:
       test: [ "CMD", "curl", "http://localhost:9080/health/ready" ]
-      interval: 2s
+      interval: 10s
       timeout: 10s
       retries: 24
-      start_period: 5s
+      start_period: 10s
     ports:
-      - "${BACKEND_PORT}:9080"
+      - "9080:9080"
     environment:
-      MYSQL_HOSTNAME: "backend-db"
+      MYSQL_HOSTNAME: "mysql"
       MYSQL_PORT: "3306"
-      MYSQL_ROOT_PASSWORD: "${BACKEND_DB_PASSWORD}"
-      MYSQL_DATABASE: "${BACKEND_DB_NAME}"
-      FRONTEND_URL: "${FRONTEND_URL}"
-      JWT_SHAREDKEY: "${JWT_SHAREDKEY}"
+      MYSQL_DATABASE: "people-db"
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_USE_SSL: "true"
     depends_on:
-      backend-db:
+      mysql:
         condition: service_healthy
     networks:
-      - umpire-network
+      - hrm-network
 
-  backend-db:
-    image: docker.io/mysql:${DB_VERSION}
-    pull_policy: missing
-    healthcheck:
-      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
-      interval: 2s
-      timeout: 10s
-      start_period: 2s
-      retries: 10
+  mysql:
+    image: mysql:latest
     volumes:
-      - backend-db-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: "${BACKEND_DB_NAME}"
+      MYSQL_DATABASE: people-db
     ports:
       - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 30s
+      timeout: 10s
+      start_period: 10s
+      retries: 10
     networks:
-      - umpire-network
-
+      - hrm-network
 volumes:
   mysql-data:
 
 networks:
-  umpire-network:
+  hrm-network:
     driver: bridge
-#  user-service-db-data:
