@@ -6,7 +6,7 @@ services:
     build: .
     healthcheck:
       test: [ "CMD", "curl", "http://localhost:9080/health/ready" ]
-      interval: 10s
+      interval: 2s
       timeout: 10s
       retries: 24
       start_period: 10s
@@ -29,18 +29,19 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: people-db
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "people-db"
     ports:
       - "3306:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
-      interval: 30s
+      interval: 2s
       timeout: 10s
-      start_period: 10s
+      start_period: 2s
       retries: 10
     networks:
       - hrm-network
+
 volumes:
   mysql-data:
 

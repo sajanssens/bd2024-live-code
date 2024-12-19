@@ -29,11 +29,11 @@
     <dataSource id="DefaultDataSource"
                 jndiName="jdbc/peopleMySqlDatasource">
         <jdbcDriver libraryRef="MySQLLib"/>
-        <properties serverName="mysql"
-                    portNumber="3306"
-                    useSSL="false" allowPublicKeyRetrieval="true"
-                    databaseName="people-db"
-                    user="root" password="root"
+        <properties serverName="${MYSQL_HOSTNAME}"
+                    portNumber="${MYSQL_PORT}"
+                    databaseName="${MYSQL_DATABASE}"
+                    user="root" password="${MYSQL_ROOT_PASSWORD}"
+                    useSSL="${MYSQL_USE_SSL}" allowPublicKeyRetrieval="true"
                     serverTimezone="UTC"/>
     </dataSource>
 
